@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+
+import csv
+import os
+#import sys
+from datetime import datetime, timedelta
+
+def create_csv_by_week(filename, field_name):
+    # Get the current date
+    today = datetime.today()
+
+    # Get the year and week number of the current date
+    year, week, _ = today.isocalendar()
+
+    # Get the date of the first day of the current week
+    start_of_week = today - timedelta(days=today.weekday())
+
+    # Get the filename in the format of YYYY-MM-WeekNumberOfTheYear.csv
+    filename = '{}-{}-{}.csv'.format(year, start_of_week.strftime('%m'), week)
+
+    # Create the directory if it doesn't exist
+    directory = '{}/{}/{}/'.format(year, start_of_week.strftime('%m'), week)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    # Create the new CSV file
+    with open('{}/{}'.format(directory, filename), 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+
+        # Open the original CSV file
+        with open(filename, 'r') as original_file:
+            reader = csv.DictReader(original_file)
+
+            # Write the header row to the new CSV file
+            writer.writerow([header.lower().replace(' ', '_') for header in reader.fieldnames])
+
+            # Write the rows to the new CSV file
+            for row in reader:
+                writer.writerow([row[field_name]])
