@@ -2,10 +2,9 @@
 
 ## General Information
 
-* Text appearing in angle brackets (<\>) is required.
 * \<indent\> must be a minimum of two spaces and is required if the line it's
   on is being used.
-* There can be only one default commodity
+
 * ledgers [secondary dates](https://hledger.org/hledger.html#secondary-dates)
   are supported but not recommended, stick with [posting
   dates](https://hledger.org/hledger.html#posting-dates)
@@ -38,6 +37,8 @@ In hledger, a commodity is a kind of value that can be counted or measured. It
 could be anything like dollars, hours, etc. The [default
 commodity](https://hledger.org/hledger.html#default-commodity) is the one that
 hledger will assume when it's not specified in the transactions.
+
+Note: There can be only one default commodity.
 
 You can also declare commodities using the [commodity
 directive](https://hledger.org/hledger.html#declaring-commodities). Declaring
