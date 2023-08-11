@@ -1,4 +1,4 @@
-# Hledger Journal Format 
+# Hledger Journal Format
 
 ## General Information
 
@@ -37,7 +37,7 @@ end comment
 In hledger, a commodity is a kind of value that can be counted or measured. It
 could be anything like dollars, hours, etc. The [default
 commodity](https://hledger.org/hledger.html#default-commodity) is the one that
-hledger will assume when it's not specified in the transactions. 
+hledger will assume when it's not specified in the transactions.
 
 You can also declare commodities using the [commodity
 directive](https://hledger.org/hledger.html#declaring-commodities). Declaring
@@ -69,54 +69,67 @@ This is a required component.
 
 ### [Status](https://hledger.org/hledger.html#status)
 
-`Status` is the state of the transaction. It can be null, !, or *. The status is used to indicate if the transaction is pending (!) or cleared (*).
+`Status` is the state of the transaction. It can be null, !, or \*. The status
+is used to indicate if the transaction is pending (!) or cleared (\*).
 
 This component is optional.
 
 ### [Code](https://hledger.org/hledger.html#code)
 
-`Code` is a reference number or identifier for the transaction. It is often used to record check numbers or other reference information.
+`Code` is a reference number or identifier for the transaction. It is often
+used to record check numbers or other reference information.
 
 This component is optional.
 
 ### [Description](https://hledger.org/hledger.html#description)
 
-`Description` provides more details about the transaction. It is a brief summary of the transaction's purpose.
+`Description` provides more details about the transaction. It is a brief
+summary of the transaction's purpose.
 
 This is a required component.
 
 ### [Transaction Comment](https://hledger.org/hledger.html#account-comments)
 
-`Transaction Comment` provides additional information or notes for the transaction. It can be used to add any extra details about the transaction that are not covered in the description.
+`Transaction Comment` provides additional information or notes for the
+transaction. It can be used to add any extra details about the transaction
+that are not covered in the description.
 
 This component is optional.
 
 ### [Tag](https://hledger.org/hledger.html#tags-1)
 
-`Tag` is a keyword or label that helps in categorizing transactions. Tags can be used to group related transactions together for reporting purposes.
+`Tag` is a keyword or label that helps in categorizing transactions. Tags can
+be used to group related transactions together for reporting purposes.
 
 This component is optional.
 
 ### [Posting](https://hledger.org/1.26/hledger.html#virtual-postings)
 
-`Posting` records the changes in account balances due to the transaction. Each transaction must have at least one posting, and each posting affects the balance of an account.
+`Posting` records the changes in account balances due to the transaction. Each
+transaction must have at least one posting, and each posting affects the
+balance of an account.
 
 This is a required component.
 
 ### [Account Name](https://hledger.org/hledger.html#account-names)
 
-`Account Name` is the name of the account affected by the transaction. Account names are hierarchical, and different levels of the hierarchy are separated by colons.
+`Account Name` is the name of the account affected by the transaction. Account
+names are hierarchical, and different levels of the hierarchy are separated by
+colons.
 
 This is a required component.
 
 ### [Amount](https://hledger.org/hledger.html#amounts)
 
-`Amount` represents the value of the transaction. Amounts can be in any currency or commodity, and hledger will keep track of each one separately.
+`Amount` represents the value of the transaction. Amounts can be in any
+currency or commodity, and hledger will keep track of each one separately.
 
 This is a required component.
 
 ### [Posting Comment](https://hledger.org/hledger.html#comments)
 
-`Posting Comment` provides additional information or notes about the posting. It can be used to add any extra details about the posting that are not covered in the account name or amount.
+`Posting Comment` provides additional information or notes about the posting.
+It can be used to add any extra details about the posting that are not covered
+in the account name or amount.
 
 This component is optional.
