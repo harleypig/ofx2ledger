@@ -2,38 +2,67 @@
 
 import csv
 import os
-#import sys
-from datetime import datetime, timedelta
+import datetime
 
-def create_csv_by_week(filename, field_name):
-    # Get the current date
-    today = datetime.today()
-
-    # Get the year and week number of the current date
-    year, week, _ = today.isocalendar()
-
-    # Get the date of the first day of the current week
-    start_of_week = today - timedelta(days=today.weekday())
-
-    # Get the filename in the format of YYYY-MM-WeekNumberOfTheYear.csv
-    filename = '{}-{}-{}.csv'.format(year, start_of_week.strftime('%m'), week)
-
-    # Create the directory if it doesn't exist
-    directory = '{}/{}/{}/'.format(year, start_of_week.strftime('%m'), week)
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-    # Create the new CSV file
-    with open('{}/{}'.format(directory, filename), 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-
-        # Open the original CSV file
-        with open(filename, 'r') as original_file:
-            reader = csv.DictReader(original_file)
-
-            # Write the header row to the new CSV file
-            writer.writerow([header.lower().replace(' ', '_') for header in reader.fieldnames])
-
-            # Write the rows to the new CSV file
+##############################################################################
+def load_csv(filename):
+    try:
+        with open(filename, 'r') as csvfile:
+            reader = csv.DictReader(csvfile)
             for row in reader:
-                writer.writerow([row[field_name]])
+                yield row
+
+    except FileNotFoundError:
+        print(f"Error: could not find file {filename}")
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+##############################################################################
+def parse_row(data: dict,
+              row: dict,
+              fieldname: str,
+              date_format: str,
+              path: str):
+
+    try:
+        date = datetime.datetime.strptime(row[fieldname], date_format)
+
+    except ValueError:
+        return "Invalid date format"
+
+    year = date.strftime("%Y")
+    week_num = date.strftime("%U")
+    week_dir = os.path.join(path, year, f"Week{week_num}")
+
+#    try:
+#        os.makedirs(week_dir, exist_ok=True)
+#
+#    except OSError as e:
+#        print(f"Error: {e}")
+
+    file_path = os.path.join(week_dir, f"{year}-Week{week_num}.csv")
+
+    data.setdefault(file_path, []).append(row)
+
+    return file_path
+
+##############################################################################
+def read_csv(filename: str, fieldname: str, date_format: str, path: str):
+    data = {}
+
+    for row in load_csv(filename):
+        parse_row(data, row, fieldname, date_format, path)
+
+    print("tbd")
+
+##############################################################################
+# Transaction_Number,Date,Description,Memo,Amount_Debit,Amount_Credit,Balance,Check_Number,Fees
+# 2987467,04/30/2010,"Transaction COMMENT","Avg Checking Bal for Apr $169.52",0.00,,,,
+
+filename = '8361157_50-2010-04.csv'
+fieldname = 'Date'
+date_format = '%m/%d/%Y'
+path = "first_pass"
+
+read_csv(filename, fieldname, date_format, path)
