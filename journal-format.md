@@ -62,31 +62,61 @@ date status code description
 Each component of the transaction is explained below:
 
 ### [Date](https://hledger.org/hledger.html#dates)
-The date when the transaction occurred. This is a required component.
+
+The date when the transaction occurred. It is usually written in the format YYYY/MM/DD.
+
+This is a required component.
 
 ### [Status](https://hledger.org/hledger.html#status)
-The status of the transaction. It can be null, !, or *. This component is optional.
+
+The status of the transaction. It can be null, !, or *. The status is used to indicate if the transaction is pending (!) or cleared (*).
+
+This component is optional.
 
 ### [Code](https://hledger.org/hledger.html#code)
-The code is a reference number or identifier for the transaction. This component is optional.
+
+The code is a reference number or identifier for the transaction. It is often used to record check numbers or other reference information.
+
+This component is optional.
 
 ### [Description](https://hledger.org/hledger.html#description)
-The description provides more details about the transaction. This is a required component.
+
+The description provides more details about the transaction. It is a brief summary of the transaction's purpose.
+
+This is a required component.
 
 ### [Transaction Comment](https://hledger.org/hledger.html#account-comments)
-The comment for the transaction provides additional information or notes. This component is optional.
+
+The comment for the transaction provides additional information or notes. It can be used to add any extra details about the transaction that are not covered in the description.
+
+This component is optional.
 
 ### [Tag](https://hledger.org/hledger.html#tags-1)
-The tag is a keyword or label that helps in categorizing transactions. This component is optional.
+
+The tag is a keyword or label that helps in categorizing transactions. Tags can be used to group related transactions together for reporting purposes.
+
+This component is optional.
 
 ### [Posting](https://hledger.org/1.26/hledger.html#virtual-postings)
-The posting records the changes in account balances due to the transaction. This is a required component.
+
+The posting records the changes in account balances due to the transaction. Each transaction must have at least one posting, and each posting affects the balance of an account.
+
+This is a required component.
 
 ### [Account Name](https://hledger.org/hledger.html#account-names)
-The name of the account affected by the transaction. This is a required component.
+
+The name of the account affected by the transaction. Account names are hierarchical, and different levels of the hierarchy are separated by colons.
+
+This is a required component.
 
 ### [Amount](https://hledger.org/hledger.html#amounts)
-The amount of the transaction represents the value of the transaction. This is a required component.
+
+The amount of the transaction represents the value of the transaction. Amounts can be in any currency or commodity, and hledger will keep track of each one separately.
+
+This is a required component.
 
 ### [Posting Comment](https://hledger.org/hledger.html#comments)
-The comment for the posting provides additional information or notes about the posting. This component is optional.
+
+The comment for the posting provides additional information or notes about the posting. It can be used to add any extra details about the posting that are not covered in the account name or amount.
+
+This component is optional.
