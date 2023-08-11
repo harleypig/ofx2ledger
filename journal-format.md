@@ -59,9 +59,9 @@ Each component of the
 [transaction](https://hledger.org/hledger.html#transactions) is explained
 below:
 
-### [Date](https://hledger.org/hledger.html#dates)
+### Date
 
-`Date` is when the transaction occurred. It is usually written in the format
+[`Date`](https://hledger.org/hledger.html#dates) is when the transaction occurred. It is usually written in the format
 YYYY/MM/DD.
 
 hledger supports [secondary
@@ -71,30 +71,30 @@ dates](https://hledger.org/hledger.html#posting-dates).
 
 This is a required component.
 
-### [Status](https://hledger.org/hledger.html#status)
+### Status
 
-`Status` is the state of the transaction. It can be null, !, or \*. The status
+[`Status`](https://hledger.org/hledger.html#status) is the state of the transaction. It can be null, !, or \*. The status
 is used to indicate if the transaction is pending (!) or cleared (\*).
 
 This component is optional.
 
-### [Code](https://hledger.org/hledger.html#code)
+### Code
 
-`Code` is a reference number or identifier for the transaction. It is often
+[`Code`](https://hledger.org/hledger.html#code) is a reference number or identifier for the transaction. It is often
 used to record check numbers or other reference information.
 
 This component is optional.
 
-### [Description](https://hledger.org/hledger.html#description)
+### Description
 
-`Description` provides more details about the transaction. It is a brief
+[`Description`](https://hledger.org/hledger.html#description) provides more details about the transaction. It is a brief
 summary of the transaction's purpose.
 
 This is a required component.
 
-### [Transaction Comment](https://hledger.org/1.30/hledger.html#transaction-comments)
+### Transaction Comment
 
-`Transaction Comment` provides additional information or notes for the
+[`Transaction Comment`](https://hledger.org/1.30/hledger.html#transaction-comments) provides additional information or notes for the
 transaction. It can be used to add any extra details about the transaction
 that are not covered in the description. Note that multiple account comment
 lines can be added, but they end at the first posting. Transaction comments
@@ -102,40 +102,40 @@ must be indented to be associated with the transaction.
 
 This component is optional.
 
-### [Tag](https://hledger.org/hledger.html#tags-1)
+### Tag
 
-`Tag` is a keyword or label that helps in categorizing transactions. Tags can
+[`Tag`](https://hledger.org/hledger.html#tags-1) is a keyword or label that helps in categorizing transactions. Tags can
 be used to group related transactions together for reporting purposes.
 
 This component is optional.
 
-### [Posting](https://hledger.org/hledger.html#virtual-postings)
+### Posting
 
-`Posting` records the changes in account balances due to the transaction. Each
+[`Posting`](https://hledger.org/hledger.html#virtual-postings) records the changes in account balances due to the transaction. Each
 transaction must have at least one posting, and each posting affects the
 balance of an account. The order of postings in a transaction can affect the
 balance calculations, so it's important to maintain the correct order.
 
 This is a required component.
 
-### [Account Name](https://hledger.org/hledger.html#account-names)
+### Account Name
 
-`Account Name` is the name of the account affected by the transaction. Account
+[`Account Name`](https://hledger.org/hledger.html#account-names) is the name of the account affected by the transaction. Account
 names are hierarchical, and different levels of the hierarchy are separated by
 colons.
 
 This is a required component.
 
-### [Amount](https://hledger.org/hledger.html#amounts)
+### Amount
 
-`Amount` represents the value of the transaction. Amounts can be in any
+[`Amount`](https://hledger.org/hledger.html#amounts) represents the value of the transaction. Amounts can be in any
 currency or commodity, and hledger will keep track of each one separately.
 
 This is a required component.
 
-### [Posting Comment](https://hledger.org/hledger.html#comments)
+### Posting Comment
 
-`Posting Comment` provides additional information or notes about the posting.
+[`Posting Comment`](https://hledger.org/hledger.html#comments) provides additional information or notes about the posting.
 It can be used to add any extra details about the posting that are not covered
 in the account name or amount. Posting comments must be indented to be
 associated with the posting.
