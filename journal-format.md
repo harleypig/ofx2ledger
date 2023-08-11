@@ -61,32 +61,32 @@ date status code description
 
 Each component of the transaction is explained below:
 
-### Date
-The date of the transaction. More details can be found [here](https://hledger.org/hledger.html#dates).
+### [Date](https://hledger.org/hledger.html#dates)
+The date when the transaction occurred. This is a required component.
 
-### Status
-The status of the transaction. It can be null, !, or *. More details can be found [here](https://hledger.org/hledger.html#status).
+### [Status](https://hledger.org/hledger.html#status)
+The status of the transaction. It can be null, !, or *. This component is optional.
 
-### Code
-The code of the transaction. More details can be found [here](https://hledger.org/hledger.html#code).
+### [Code](https://hledger.org/hledger.html#code)
+The code is a reference number or identifier for the transaction. This component is optional.
 
-### Description
-The description of the transaction. More details can be found [here](https://hledger.org/hledger.html#description).
+### [Description](https://hledger.org/hledger.html#description)
+The description provides more details about the transaction. This is a required component.
 
-### Transaction Comment
-The comment for the transaction. More details can be found [here](https://hledger.org/hledger.html#account-comments).
+### [Transaction Comment](https://hledger.org/hledger.html#account-comments)
+The comment for the transaction provides additional information or notes. This component is optional.
 
-### Tag
-The tag for the transaction. More details can be found [here](https://hledger.org/hledger.html#tags-1).
+### [Tag](https://hledger.org/hledger.html#tags-1)
+The tag is a keyword or label that helps in categorizing transactions. This component is optional.
 
-### Posting
-The posting of the transaction. More details can be found [here](https://hledger.org/1.26/hledger.html#virtual-postings).
+### [Posting](https://hledger.org/1.26/hledger.html#virtual-postings)
+The posting records the changes in account balances due to the transaction. This is a required component.
 
-### Account Name
-The name of the account. More details can be found [here](https://hledger.org/hledger.html#account-names).
+### [Account Name](https://hledger.org/hledger.html#account-names)
+The name of the account affected by the transaction. This is a required component.
 
-### Amount
-The amount of the transaction. More details can be found [here](https://hledger.org/hledger.html#amounts).
+### [Amount](https://hledger.org/hledger.html#amounts)
+The amount of the transaction represents the value of the transaction. This is a required component.
 
-### Posting Comment
-The comment for the posting. More details can be found [here](https://hledger.org/hledger.html#comments).
+### [Posting Comment](https://hledger.org/hledger.html#comments)
+The comment for the posting provides additional information or notes about the posting. This component is optional.
