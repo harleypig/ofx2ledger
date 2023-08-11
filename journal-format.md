@@ -1,17 +1,32 @@
 # Hledger Journal Format
 
-## General Information
+## Jouranl Layout
 
-Indentation is crucial in hledger transactions. It must be a minimum of two
-spaces and is required if the line it's on is being used. Indentation is used
-to group related lines together, such as postings with a transaction, or
-comments with the thing they are commenting on.
+```
+# single line comment
 
-Without proper indentation, hledger might interpret your data differently than
-you intended. For more details, refer to the [hledger
-documentation](https://hledger.org/hledger.html).
+comment
 
-## File comments
+This is a multi-line file comment.
+The blank lines are not required.
+The keywords 'comment' and 'end comment' are required.
+
+end comment
+
+commodity
+
+# A transaction in hledger is represented as follows:
+
+date status code description
+  ; transaction comment | tag ...
+  ; transaction comment continued | tag ...
+; postings
+  status account name amount
+  ; posting comment | tag ...
+  ; posting comment continued | tag ...
+```
+
+## File Comments
 
 These comments can only appear outside of transaction blocks.
 
@@ -21,20 +36,11 @@ with any of [;#*]. Whenever possible, use '#'.
 A [multiline comment](https://hledger.org/hledger.html#comment-blocks) starts
 with 'comment' and ends with 'end comment'
 
-```
-comment
+## Commodity
 
-This is a multi-line file comment.
-The blank lines are not required.
-The keywords 'comment' and 'end comment' are required.
-
-end comment
-```
-
-## [Commodity](https://hledger.org/hledger.html#commodity)
-
-In hledger, a commodity is a kind of value that can be counted or measured. It
-could be anything like dollars, hours, etc. The [default
+In hledger, a [commodity](https://hledger.org/hledger.html#commodity) is
+a kind of value that can be counted or measured. It could be anything like
+dollars, hours, etc. The [default
 commodity](https://hledger.org/hledger.html#default-commodity) is the one that
 hledger will assume when it's not specified in the transactions.
 
@@ -49,19 +55,9 @@ Note: There can be only one default commodity.
 
 ## Transactions
 
-A transaction in hledger is represented as follows:
-
-```plaintext
-date status code description
-  ; transaction comment | tag ...
-  ; transaction comment continued | tag ...
-; posting
-  status account name amount
-  ; posting comment | tag ...
-  ; posting comment continued | tag ...
-```
-
-Each component of the transaction is explained below:
+Each component of the
+[transaction](https://hledger.org/hledger.html#transactions) is explained
+below:
 
 ### [Date](https://hledger.org/hledger.html#dates)
 
@@ -82,40 +78,12 @@ is used to indicate if the transaction is pending (!) or cleared (\*).
 
 This component is optional.
 
-## Additional Information
-
-### Balance Assertions and Balance Assignments
-
-Balance assertions and assignments are a crucial part of hledger's journal format. They allow you to specify the expected balance of an account after a transaction, or to assign a balance to an account. For more details, refer to the [hledger documentation on balance assertions and assignments](https://hledger.org/hledger.html#balance-assertions).
-
-### Periodic Transactions
-
-Periodic transactions are a powerful feature of hledger that allow you to automate recurring transactions. They can be used to automatically generate transactions for regular expenses or income, like rent or salary. For more details, refer to the [hledger documentation on periodic transactions](https://hledger.org/hledger.html#periodic-transactions).
-
-### Automated Transactions
-
-Automated transactions are another powerful feature of hledger that can simplify your accounting. They allow you to define rules that automatically generate additional postings whenever a transaction matches certain criteria. For more details, refer to the [hledger documentation on automated transactions](https://hledger.org/hledger.html#automated-transactions).
-
 ### [Code](https://hledger.org/hledger.html#code)
 
 `Code` is a reference number or identifier for the transaction. It is often
 used to record check numbers or other reference information.
 
 This component is optional.
-
-## Additional Information
-
-### Balance Assertions and Balance Assignments
-
-Balance assertions and assignments are a crucial part of hledger's journal format. They allow you to specify the expected balance of an account after a transaction, or to assign a balance to an account. For more details, refer to the [hledger documentation on balance assertions and assignments](https://hledger.org/hledger.html#balance-assertions).
-
-### Periodic Transactions
-
-Periodic transactions are a powerful feature of hledger that allow you to automate recurring transactions. They can be used to automatically generate transactions for regular expenses or income, like rent or salary. For more details, refer to the [hledger documentation on periodic transactions](https://hledger.org/hledger.html#periodic-transactions).
-
-### Automated Transactions
-
-Automated transactions are another powerful feature of hledger that can simplify your accounting. They allow you to define rules that automatically generate additional postings whenever a transaction matches certain criteria. For more details, refer to the [hledger documentation on automated transactions](https://hledger.org/hledger.html#automated-transactions).
 
 ### [Description](https://hledger.org/hledger.html#description)
 
@@ -134,41 +102,12 @@ must be indented to be associated with the transaction.
 
 This component is optional.
 
-## Additional Information
-## Additional Information
-
-### Balance Assertions and Balance Assignments
-
-Balance assertions and assignments are a crucial part of hledger's journal format. They allow you to specify the expected balance of an account after a transaction, or to assign a balance to an account. For more details, refer to the [hledger documentation on balance assertions and assignments](https://hledger.org/hledger.html#balance-assertions).
-
-### Periodic Transactions
-
-Periodic transactions are a powerful feature of hledger that allow you to automate recurring transactions. They can be used to automatically generate transactions for regular expenses or income, like rent or salary. For more details, refer to the [hledger documentation on periodic transactions](https://hledger.org/hledger.html#periodic-transactions).
-
-### Automated Transactions
-
-Automated transactions are another powerful feature of hledger that can simplify your accounting. They allow you to define rules that automatically generate additional postings whenever a transaction matches certain criteria. For more details, refer to the [hledger documentation on automated transactions](https://hledger.org/hledger.html#automated-transactions).
-
 ### [Tag](https://hledger.org/hledger.html#tags-1)
 
 `Tag` is a keyword or label that helps in categorizing transactions. Tags can
 be used to group related transactions together for reporting purposes.
 
 This component is optional.
-
-## Additional Information
-
-### Balance Assertions and Balance Assignments
-
-Balance assertions and assignments are a crucial part of hledger's journal format. They allow you to specify the expected balance of an account after a transaction, or to assign a balance to an account. For more details, refer to the [hledger documentation on balance assertions and assignments](https://hledger.org/hledger.html#balance-assertions).
-
-### Periodic Transactions
-
-Periodic transactions are a powerful feature of hledger that allow you to automate recurring transactions. They can be used to automatically generate transactions for regular expenses or income, like rent or salary. For more details, refer to the [hledger documentation on periodic transactions](https://hledger.org/hledger.html#periodic-transactions).
-
-### Automated Transactions
-
-Automated transactions are another powerful feature of hledger that can simplify your accounting. They allow you to define rules that automatically generate additional postings whenever a transaction matches certain criteria. For more details, refer to the [hledger documentation on automated transactions](https://hledger.org/hledger.html#automated-transactions).
 
 ### [Posting](https://hledger.org/hledger.html#virtual-postings)
 
@@ -205,14 +144,37 @@ This component is optional.
 
 ## Additional Information
 
+### Indentation
+
+Indentation is crucial in hledger transactions. It must be a minimum of two
+spaces and is required if the line it's on is being used. Indentation is used
+to group related lines together, such as postings with a transaction, or
+comments with the thing they are commenting on.
+
+Without proper indentation, hledger might interpret your data differently than
+you intended. For more details, refer to the [hledger
+documentation](https://hledger.org/hledger.html).
+
 ### Balance Assertions and Balance Assignments
 
-Balance assertions and assignments are a crucial part of hledger's journal format. They allow you to specify the expected balance of an account after a transaction, or to assign a balance to an account. For more details, refer to the [hledger documentation on balance assertions and assignments](https://hledger.org/hledger.html#balance-assertions).
+Balance assertions and assignments are a crucial part of hledger's journal
+format. They allow you to specify the expected balance of an account after
+a transaction, or to assign a balance to an account. For more details, refer
+to the [hledger documentation on balance assertions and
+assignments](https://hledger.org/hledger.html#balance-assertions).
 
 ### Periodic Transactions
 
-Periodic transactions are a powerful feature of hledger that allow you to automate recurring transactions. They can be used to automatically generate transactions for regular expenses or income, like rent or salary. For more details, refer to the [hledger documentation on periodic transactions](https://hledger.org/hledger.html#periodic-transactions).
+Periodic transactions are a powerful feature of hledger that allow you to
+automate recurring transactions. They can be used to automatically generate
+transactions for regular expenses or income, like rent or salary. For more
+details, refer to the [hledger documentation on periodic
+transactions](https://hledger.org/hledger.html#periodic-transactions).
 
 ### Automated Transactions
 
-Automated transactions are another powerful feature of hledger that can simplify your accounting. They allow you to define rules that automatically generate additional postings whenever a transaction matches certain criteria. For more details, refer to the [hledger documentation on automated transactions](https://hledger.org/hledger.html#automated-transactions).
+Automated transactions are another powerful feature of hledger that can
+simplify your accounting. They allow you to define rules that automatically
+generate additional postings whenever a transaction matches certain criteria.
+For more details, refer to the [hledger documentation on automated
+transactions](https://hledger.org/hledger.html#automated-transactions).
