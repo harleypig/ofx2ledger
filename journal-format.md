@@ -40,7 +40,7 @@ hledger will assume when it's not specified in the transactions.
 
 Note: There can be only one default commodity.
 
-You can also declare commodities using the [commodity
+Commodities can be declared in two ways: inline in the amount field of a posting, or with a [commodity
 directive](https://hledger.org/hledger.html#declaring-commodities). Declaring
 commodities can help in formatting and conversion rates. It's a way to tell
 hledger how to display amounts of this commodity, and what its conversion rate
