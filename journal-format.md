@@ -2,7 +2,7 @@
 
 ## General Information
 
-Indentation must be a minimum of two spaces and is required if the line it's on is being used.
+Indentation is crucial in hledger transactions. It must be a minimum of two spaces and is required if the line it's on is being used. Indentation is used to group related lines together, such as postings with a transaction, or comments with the thing they are commenting on. Without proper indentation, hledger might interpret your data differently than you intended. For more details, refer to the [hledger documentation](https://hledger.org/1.30/hledger.html).
 
 ## File comments
 
@@ -90,9 +90,9 @@ This is a required component.
 
 ### [Transaction Comment](https://hledger.org/hledger.html#account-comments)
 
-`Transaction Comment` provides additional information or notes for the
-transaction. It can be used to add any extra details about the transaction
-that are not covered in the description. Note that multiple account comment
+`Transaction Comment` provides additional information or notes for the transaction. It can be used to add any extra details about the transaction that are not covered in the description. Note that multiple account comment lines can be added, but they end at the first posting. Transaction comments must be indented to be associated with the transaction. For more details, refer to the [hledger documentation](https://hledger.org/1.30/hledger.html).
+
+This component is optional.
 lines can be added, but they end at the first posting.
 
 This component is optional.
@@ -129,8 +129,9 @@ This is a required component.
 
 ### [Posting Comment](https://hledger.org/hledger.html#comments)
 
-`Posting Comment` provides additional information or notes about the posting.
-It can be used to add any extra details about the posting that are not covered
+`Posting Comment` provides additional information or notes about the posting. It can be used to add any extra details about the posting that are not covered in the account name or amount. Posting comments must be indented to be associated with the posting. For more details, refer to the [hledger documentation](https://hledger.org/1.30/hledger.html).
+
+This component is optional.
 in the account name or amount.
 
 This component is optional.
