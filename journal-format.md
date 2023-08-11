@@ -115,11 +115,12 @@ be used to group related transactions together for reporting purposes.
 
 This component is optional.
 
-### [Posting](https://hledger.org/1.26/hledger.html#virtual-postings)
+### [Posting](https://hledger.org/hledger.html#virtual-postings)
 
 `Posting` records the changes in account balances due to the transaction. Each
 transaction must have at least one posting, and each posting affects the
-balance of an account.
+balance of an account. The order of postings in a transaction can affect the
+balance calculations, so it's important to maintain the correct order.
 
 This is a required component.
 
