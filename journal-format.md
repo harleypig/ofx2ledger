@@ -95,7 +95,7 @@ summary of the transaction's purpose.
 
 This is a required component.
 
-### [Transaction Comment](https://hledger.org/hledger.html#transaction-comments)
+### [Transaction Comment](https://hledger.org/1.30/hledger.html#transaction-comments)
 
 `Transaction Comment` provides additional information or notes for the transaction. It can be used to add any extra details about the transaction that are not covered in the description. Note that multiple account comment lines can be added, but they end at the first posting. Transaction comments must be indented to be associated with the transaction. For more details, refer to the [hledger documentation](https://hledger.org/1.30/hledger.html).
 
