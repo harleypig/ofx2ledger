@@ -38,13 +38,14 @@ could be anything like dollars, hours, etc. The [default
 commodity](https://hledger.org/hledger.html#default-commodity) is the one that
 hledger will assume when it's not specified in the transactions.
 
-Note: There can be only one default commodity.
-
-Commodities can be declared in two ways: inline in the amount field of a posting, or with a [commodity
+Commodities can be declared in two ways: inline in the amount field of
+a posting, or with a [commodity
 directive](https://hledger.org/hledger.html#declaring-commodities). Declaring
 commodities can help in formatting and conversion rates. It's a way to tell
 hledger how to display amounts of this commodity, and what its conversion rate
 is to other commodities.
+
+Note: There can be only one default commodity.
 
 ## Transactions
 
