@@ -50,11 +50,11 @@ is to other commodities.
 A transaction in hledger is represented as follows:
 
 ```plaintext
-[date] [status] [(code)] [description]
+date status code description
   ; transaction comment | tag ...
   ; transaction comment continued | tag ...
 ; posting
-  [status] account name [amount]
+  status account name amount
   ; posting comment | tag ...
   ; posting comment continued | tag ...
 ```
