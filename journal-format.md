@@ -45,10 +45,48 @@ commodities can help in formatting and conversion rates. It's a way to tell
 hledger how to display amounts of this commodity, and what its conversion rate
 is to other commodities.
 
-## [Transactions](https://hledger.org/hledger.html#default-commodity)
+## Transactions
 
-[date](https://hledger.org/hledger.html#dates) [\[null\|\!\|\*\]](https://hledger.org/hledger.html#status) [\[(code)\]](https://hledger.org/hledger.html#code) [\[description\]](https://hledger.org/hledger.html#description) \[\<indent\>; [transaction comment](https://hledger.org/hledger.html#account-comments) \| [tag](https://hledger.org/hledger.html#tags-1) ...\]
-\[\<indent\>; [transaction comment](https://hledger.org/hledger.html#account-comments) continued \| [tag](https://hledger.org/hledger.html#tags-1) ...\]\*
-; [posting](https://hledger.org/1.26/hledger.html#virtual-postings)
-\<indent\> [\[null\|\!\|\*\]](https://hledger.org/hledger.html#status) [account name](https://hledger.org/hledger.html#account-names) \[\<indent\>[amount](https://hledger.org/hledger.html#amounts)\] \[\<indent\>; [posting comment](https://hledger.org/hledger.html#comments) \| [tag](https://hledger.org/hledger.html#tags-1) ...\]
-\[\<indent\>; [posting comment](https://hledger.org/hledger.html#comments) continued \| [tag](https://hledger.org/hledger.html#tags-1) ...\]\*
+A transaction in hledger is represented as follows:
+
+```plaintext
+[date] [status] [(code)] [description]
+  ; transaction comment | tag ...
+  ; transaction comment continued | tag ...
+; posting
+  [status] account name [amount]
+  ; posting comment | tag ...
+  ; posting comment continued | tag ...
+```
+
+Each component of the transaction is explained below:
+
+### Date
+The date of the transaction. More details can be found [here](https://hledger.org/hledger.html#dates).
+
+### Status
+The status of the transaction. It can be null, !, or *. More details can be found [here](https://hledger.org/hledger.html#status).
+
+### Code
+The code of the transaction. More details can be found [here](https://hledger.org/hledger.html#code).
+
+### Description
+The description of the transaction. More details can be found [here](https://hledger.org/hledger.html#description).
+
+### Transaction Comment
+The comment for the transaction. More details can be found [here](https://hledger.org/hledger.html#account-comments).
+
+### Tag
+The tag for the transaction. More details can be found [here](https://hledger.org/hledger.html#tags-1).
+
+### Posting
+The posting of the transaction. More details can be found [here](https://hledger.org/1.26/hledger.html#virtual-postings).
+
+### Account Name
+The name of the account. More details can be found [here](https://hledger.org/hledger.html#account-names).
+
+### Amount
+The amount of the transaction. More details can be found [here](https://hledger.org/hledger.html#amounts).
+
+### Posting Comment
+The comment for the posting. More details can be found [here](https://hledger.org/hledger.html#comments).
