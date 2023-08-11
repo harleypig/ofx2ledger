@@ -135,22 +135,6 @@ must be indented to be associated with the transaction.
 This component is optional.
 
 ## Additional Information
-
-### Balance Assertions and Balance Assignments
-
-Balance assertions and assignments are a crucial part of hledger's journal format. They allow you to specify the expected balance of an account after a transaction, or to assign a balance to an account. For more details, refer to the [hledger documentation on balance assertions and assignments](https://hledger.org/hledger.html#balance-assertions).
-
-### Periodic Transactions
-
-Periodic transactions are a powerful feature of hledger that allow you to automate recurring transactions. They can be used to automatically generate transactions for regular expenses or income, like rent or salary. For more details, refer to the [hledger documentation on periodic transactions](https://hledger.org/hledger.html#periodic-transactions).
-
-### Automated Transactions
-
-Automated transactions are another powerful feature of hledger that can simplify your accounting. They allow you to define rules that automatically generate additional postings whenever a transaction matches certain criteria. For more details, refer to the [hledger documentation on automated transactions](https://hledger.org/hledger.html#automated-transactions).
-lines can be added, but they end at the first posting.
-
-This component is optional.
-
 ## Additional Information
 
 ### Balance Assertions and Balance Assignments
