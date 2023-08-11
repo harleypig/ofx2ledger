@@ -34,7 +34,9 @@ end comment
 
 ## [Commodity](https://hledger.org/hledger.html#commodity)
 
-[default](https://hledger.org/hledger.html#default-commodity) | [commodity](https://hledger.org/hledger.html#declaring-commodities) format
+In hledger, a commodity is a kind of value that can be counted or measured. It could be anything like dollars, hours, etc. The [default commodity](https://hledger.org/hledger.html#default-commodity) is the one that hledger will assume when it's not specified in the transactions. 
+
+You can also declare commodities using the [commodity directive](https://hledger.org/hledger.html#declaring-commodities). Declaring commodities can help in formatting and conversion rates. It's a way to tell hledger how to display amounts of this commodity, and what its conversion rate is to other commodities.
 
 ## [Transactions](https://hledger.org/hledger.html#default-commodity)
 
