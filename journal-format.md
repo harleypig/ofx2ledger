@@ -4,17 +4,6 @@
 
 Indentation must be a minimum of two spaces and is required if the line it's on is being used.
 
-### [Date](https://hledger.org/hledger.html#dates)
-
-`Date` is when the transaction occurred. It is usually written in the format YYYY/MM/DD. Ledgers support [secondary dates](https://hledger.org/hledger.html#secondary-dates), but it is recommended to stick with [posting dates](https://hledger.org/hledger.html#posting-dates).
-
-This is a required component.
-
-### [Transaction Comment](https://hledger.org/hledger.html#account-comments)
-
-`Transaction Comment` provides additional information or notes for the transaction. It can be used to add any extra details about the transaction that are not covered in the description. Note that multiple account comment lines can be added, but they end at the first posting.
-
-This component is optional.
 
 ## File comments
 
