@@ -4,13 +4,21 @@ import sys
 import csv
 from ofxtools.Parser import OFXTree
 
-def extract_fieldnames_and_values(ofx_file):
+def parse_file(ofx_file):
     # Parse the OFX file
-    tree = OFXTree()
-    tree.parse(ofx_file)
+    parser = OFXTree()
+    parser.parse(ofx_file)
 
     # Convert the tree to an OFX object
-    ofx = tree.convert()
+    return parser.convert()
+
+def extract_fieldnames_and_values(ofx_file):
+    ofx = parse_file(ofx_file)
+
+    for bankmsgs in ofx.bankmsgsrsv1:
+        print(f"?{bankmsgs.stmtrs.bankacctfrom.acctid}")
+
+    exit
 
     # Extract the field names and values
     fieldnames = []
@@ -48,7 +56,8 @@ def write_to_csv(fieldnames, transactions, csv_file):
 if __name__ == "__main__":
     #ofx_file = sys.argv[1]
     #csv_file = sys.argv[2]
-    ofx_file = 'test.ofx'
+    #ofx_file = 'test.ofx'
+    ofx_file = 'raw/AllMACUAccounts_2022.ofx'
     csv_file = 'transacts.csv'
     fieldnames, transactions = extract_fieldnames_and_values(ofx_file)
     write_to_csv(fieldnames, transactions, csv_file)
