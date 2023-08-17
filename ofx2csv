@@ -9,12 +9,21 @@ def extract_fieldnames_and_values(ofx_file):
     tree = OFXTree()
     tree.parse(ofx_file)
 
+    # Convert the tree to an OFX object
+    ofx = tree.convert()
+
     # Extract the field names and values
     fieldnames = []
     transactions = []
-    for transaction in tree.convert().bank_statements[0].transactions:
-        fieldnames.extend(transaction.__dict__.keys())
-        transactions.append(transaction.__dict__)
+
+    # Check if the OFX object has a 'bank_statements' attribute
+    if hasattr(ofx, 'bank_statements'):
+        for transaction in ofx.bank_statements[0].transactions:
+            fieldnames.extend(transaction.__dict__.keys())
+            transactions.append(transaction.__dict__)
+    else:
+        # Handle other structures of OFX files
+        pass
 
     # Remove duplicates from fieldnames
     fieldnames = list(set(fieldnames))
