@@ -31,6 +31,9 @@ def extract_fieldnames_and_values(ofx_file):
     if hasattr(bankmsgs, 'stmttrnrs'):
         stmttrnrs = bankmsgs.stmttrnrs
     else:
+        from pprint import pprint
+        print("Debug: bankmsgs object does not have a 'stmttrnrs' attribute. Its current state is:")
+        pprint(vars(bankmsgs))
         continue
 
     # Extract the STMTRS object
