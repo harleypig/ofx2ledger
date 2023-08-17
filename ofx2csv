@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# https://financialdataexchange.org/common/Uploaded%20files/OFX%20files/OFX%20Banking%20Specification%20v2.3.pdf
+# 11.13.1.1.2 Bank Message Set Response Messages
+# 11.13.1     Example: Statement Download
+
 import sys
 import csv
 from ofxtools.Parser import OFXTree
@@ -12,6 +16,7 @@ def ewarn(*args):
 def eexit(exit_code=1, **kwargs):
     if kwargs:
         ewarn(**kwargs)
+
     sys.exit(exit_code)
 
 def parse_file(ofx_file):
@@ -26,6 +31,8 @@ def extract_fieldnames_and_values(ofx_file):
     ofx = parse_file(ofx_file)
 
     if not hasattr(ofx, 'bankmsgsrsv1'):
+        eexit("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.",
+              vars(ofx))
 
     for response in ofx.bankmsgsrsv1.stmttrnrs:
         # Check if the STMTTRNRS object exists before extracting it
