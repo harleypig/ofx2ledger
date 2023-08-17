@@ -47,6 +47,7 @@ def write_to_csv(fieldnames, transactions, csv_file):
 
 if __name__ == "__main__":
     ofx_file = sys.argv[1]
-    csv_file = sys.argv[2]
+    #csv_file = sys.argv[2]
+    csv_file = 'transacts.csv'
     fieldnames, transactions = extract_fieldnames_and_values(ofx_file)
     write_to_csv(fieldnames, transactions, csv_file)
