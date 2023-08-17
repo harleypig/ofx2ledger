@@ -9,15 +9,18 @@ import csv
 from ofxtools.Parser import OFXTree
 from pprint import pprint
 
+#--------------------------------------------------------------------------
 def ewarn(*args):
     for message in args:
         print(message, file=sys.stderr)
 
+#--------------------------------------------------------------------------
 def eexit(*args, exit_code=1):
     if args:
         ewarn(*args)
     sys.exit(exit_code)
 
+#--------------------------------------------------------------------------
 def parse_file(ofx_file):
     # Parse the OFX file
     parser = OFXTree()
@@ -26,6 +29,7 @@ def parse_file(ofx_file):
     # Convert the tree to an OFX object
     return parser.convert()
 
+#--------------------------------------------------------------------------
 def extract_fieldnames_and_values(ofx_file):
     ofx = parse_file(ofx_file)
 
@@ -68,6 +72,7 @@ def extract_fieldnames_and_values(ofx_file):
 #
 #    return fieldnames, transactions
 
+#--------------------------------------------------------------------------
 def write_to_csv(fieldnames, transactions, csv_file):
     with open(csv_file, 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
