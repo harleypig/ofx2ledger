@@ -22,9 +22,10 @@ def extract_fieldnames_and_values(ofx_file):
             print(f">{bankmsgs.stmtrs.bankacctfrom.acctid}")
 
         else:
+            import sys
             from pprint import pprint
-            print("Debug: bankmsgs object does not have a 'stmttrnrs' attribute. Its current state is:")
-            pprint(vars(bankmsgs))
+            print("Debug: bankmsgs object does not have a 'stmttrnrs' attribute. Its current state is:", file=sys.stderr)
+            pprint(vars(bankmsgs), stream=sys.stderr)
             continue
 
 #    # Extract the field names and values
