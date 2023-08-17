@@ -13,11 +13,9 @@ def ewarn(*args):
     for message in args:
         print(message, file=sys.stderr)
 
-def eexit(*args):
-    exit_code = args[0] if args else 1
+def eexit(exit_code=1, *args):
     if args:
-        ewarn(*args[1:])
-
+        ewarn(*args)
     sys.exit(exit_code)
 
 def parse_file(ofx_file):
