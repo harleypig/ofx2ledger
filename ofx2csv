@@ -4,6 +4,8 @@
 # 11.13.1.1.2 Bank Message Set Response Messages
 # 11.13.1     Example: Statement Download
 
+# ??? Does MACU have an api token so I can automate downloading my ofx files?
+
 import sys
 import csv
 from ofxtools.Parser import OFXTree
@@ -39,11 +41,10 @@ def build_array(ofx_file):
 
     if not ofx.bankmsgsrsv1.stmttrnrs:
         eexit("DEBUG: Expected to find at least one element in STMTTRNRS but it's not there.",
-              vars(ofx))
+              vars(ofx.bankmsgsrsv1))
 
-    for response in ofx.bankmsgsrsv1.stmttrnrs:
-        # Check if the STMTTRNRS object exists before extracting it
-        if hasattr(response, 'stmttrnrs'):
+    for account in ofx.bankmsgsrsv1.stmttrnrs:
+        if hasattr(account, 'stmttrnrs'):
             #stmttrnrs = response.stmttrnrs
             print(f">{response.stmtrs.bankacctfrom.acctid}")
 
