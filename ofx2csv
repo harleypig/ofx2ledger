@@ -6,8 +6,8 @@ from ofxtools.Parser import OFXTree
 from pprint import pprint
 
 def ewarn(**kwargs):
-    message = ' '.join([str(value) for value in kwargs.values()])
-    print(message, file=sys.stderr)
+    for key, value in kwargs.items():
+        print(f"{key}: {value}", file=sys.stderr)
 
 def eexit(exit_code=1, **kwargs):
     if kwargs:
