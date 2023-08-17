@@ -20,6 +20,7 @@ def extract_fieldnames_and_values(ofx_file):
     bankmsgs = ofx.bankmsgsrsv1
 
     # Extract the STMTTRNRS object
+   #stmttrnrs
     stmttrnrs = bankmsgs.stmttrnrs[0]
 
     # Extract the STMTRS object
@@ -46,8 +47,9 @@ def write_to_csv(fieldnames, transactions, csv_file):
             writer.writerow(transaction)
 
 if __name__ == "__main__":
-    ofx_file = sys.argv[1]
+    #ofx_file = sys.argv[1]
     #csv_file = sys.argv[2]
+    ofx_file = 'test.ofx'
     csv_file = 'transacts.csv'
     fieldnames, transactions = extract_fieldnames_and_values(ofx_file)
     write_to_csv(fieldnames, transactions, csv_file)
