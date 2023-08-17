@@ -5,9 +5,9 @@ import csv
 from ofxtools.Parser import OFXTree
 from pprint import pprint
 
-def ewarn(**kwargs):
-    for key, value in kwargs.items():
-        print(f"{key}: {value}", file=sys.stderr)
+def ewarn(*args):
+    for message in args:
+        print(message, file=sys.stderr)
 
 def eexit(exit_code=1, **kwargs):
     if kwargs:
