@@ -3,20 +3,34 @@
 import sys
 from ofxtools.Parser import OFXTree
 
-def extract_fieldnames(ofx_file):
+def extract_fieldnames_and_values(ofx_file):
     # Parse the OFX file
     tree = OFXTree()
     tree.parse(ofx_file)
 
-    # Extract the field names
+    # Extract the field names and values
     fieldnames = []
+    transactions = []
     for transaction in tree.convert().bank_statements[0].transactions:
         fieldnames.extend(transaction.__dict__.keys())
+        transactions.append(transaction.__dict__)
 
-    # Remove duplicates and return
-    return list(set(fieldnames))
+    # Remove duplicates from fieldnames
+    fieldnames = list(set(fieldnames))
+
+    return fieldnames, transactions
+
+import csv
+
+def write_to_csv(fieldnames, transactions, csv_file):
+    with open(csv_file, 'w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for transaction in transactions:
+            writer.writerow(transaction)
 
 if __name__ == "__main__":
     ofx_file = sys.argv[1]
-    fieldnames = extract_fieldnames(ofx_file)
-    print("Fieldnames:", fieldnames)
+    csv_file = sys.argv[2]
+    fieldnames, transactions = extract_fieldnames_and_values(ofx_file)
+    write_to_csv(fieldnames, transactions, csv_file)
