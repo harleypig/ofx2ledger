@@ -16,14 +16,22 @@ def extract_fieldnames_and_values(ofx_file):
     fieldnames = []
     transactions = []
 
-    # Check if the OFX object has a 'bank_statements' attribute
-    if hasattr(ofx, 'bank_statements'):
-        for transaction in ofx.bank_statements[0].transactions:
-            fieldnames.extend(transaction.__dict__.keys())
-            transactions.append(transaction.__dict__)
-    else:
-        # Handle other structures of OFX files
-        pass
+    # Extract the BANKMSGSRSV1 object
+    bankmsgs = ofx.bankmsgsrs
+
+    # Extract the STMTTRNRS object
+    stmttrnrs = bankmsgs.stmttrnrs
+
+    # Extract the STMTRS object
+    stmtrs = stmttrnrs.stmtrs
+
+    # Extract the BANKTRANLIST object
+    banktranlist = stmtrs.banktranlist
+
+    # Iterate over the transactions
+    for transaction in banktranlist.stmttrn:
+        fieldnames.extend(transaction.__dict__.keys())
+        transactions.append(transaction.__dict__)
 
     # Remove duplicates from fieldnames
     fieldnames = list(set(fieldnames))
