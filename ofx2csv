@@ -3,6 +3,7 @@
 import sys
 import csv
 from ofxtools.Parser import OFXTree
+from pprint import pprint
 
 def parse_file(ofx_file):
     # Parse the OFX file
@@ -15,17 +16,17 @@ def parse_file(ofx_file):
 def extract_fieldnames_and_values(ofx_file):
     ofx = parse_file(ofx_file)
 
-    for bankmsgs in ofx.bankmsgsrsv1:
+    if not hasattr(ofx, 'bankmsgsrsv1'):
+
+    for response in ofx.bankmsgsrsv1.stmttrnrs:
         # Check if the STMTTRNRS object exists before extracting it
-        if hasattr(bankmsgs, 'stmttrnrs'):
-            #stmttrnrs = bankmsgs.stmttrnrs
-            print(f">{bankmsgs.stmtrs.bankacctfrom.acctid}")
+        if hasattr(response, 'stmttrnrs'):
+            #stmttrnrs = response.stmttrnrs
+            print(f">{response.stmtrs.bankacctfrom.acctid}")
 
         else:
-            import sys
-            from pprint import pprint
-            print("Debug: bankmsgs object does not have a 'stmttrnrs' attribute. Its current state is:", file=sys.stderr)
-            pprint(vars(bankmsgs), stream=sys.stderr)
+            print("Debug: response object does not have a 'stmttrnrs' attribute. Its current state is:", file=sys.stderr)
+            pprint(vars(response), stream=sys.stderr)
             continue
 
 #    # Extract the field names and values
