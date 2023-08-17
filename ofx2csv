@@ -16,41 +16,40 @@ def extract_fieldnames_and_values(ofx_file):
     ofx = parse_file(ofx_file)
 
     for bankmsgs in ofx.bankmsgsrsv1:
-        print(f"?{bankmsgs.stmtrs.bankacctfrom.acctid}")
+        # Check if the STMTTRNRS object exists before extracting it
+        if hasattr(bankmsgs, 'stmttrnrs'):
+            #stmttrnrs = bankmsgs.stmttrnrs
+            print(f">{bankmsgs.stmtrs.bankacctfrom.acctid}")
 
-    exit
+        else:
+            from pprint import pprint
+            print("Debug: bankmsgs object does not have a 'stmttrnrs' attribute. Its current state is:")
+            pprint(vars(bankmsgs))
+            continue
 
-    # Extract the field names and values
-    fieldnames = []
-    transactions = []
-
-    # Extract the BANKMSGSRSV1 object
-    bankmsgs = ofx.bankmsgsrsv1
-
-    # Check if the STMTTRNRS object exists before extracting it
-    if hasattr(bankmsgs, 'stmttrnrs'):
-        stmttrnrs = bankmsgs.stmttrnrs
-    else:
-        from pprint import pprint
-        print("Debug: bankmsgs object does not have a 'stmttrnrs' attribute. Its current state is:")
-        pprint(vars(bankmsgs))
-        continue
-
-    # Extract the STMTRS object
-    stmtrs = stmttrnrs.stmtrs
-
-    # Extract the BANKTRANLIST object
-    banktranlist = stmtrs.banktranlist
-
-    # Iterate over the transactions
-    for transaction in banktranlist.stmttrn:
-        fieldnames.extend(transaction.__dict__.keys())
-        transactions.append(transaction.__dict__)
-
-    # Remove duplicates from fieldnames
-    fieldnames = list(set(fieldnames))
-
-    return fieldnames, transactions
+#    # Extract the field names and values
+#    fieldnames = []
+#    transactions = []
+#
+#    # Extract the BANKMSGSRSV1 object
+#    bankmsgs = ofx.bankmsgsrsv1
+#
+#
+#    # Extract the STMTRS object
+#    stmtrs = stmttrnrs.stmtrs
+#
+#    # Extract the BANKTRANLIST object
+#    banktranlist = stmtrs.banktranlist
+#
+#    # Iterate over the transactions
+#    for transaction in banktranlist.stmttrn:
+#        fieldnames.extend(transaction.__dict__.keys())
+#        transactions.append(transaction.__dict__)
+#
+#    # Remove duplicates from fieldnames
+#    fieldnames = list(set(fieldnames))
+#
+#    return fieldnames, transactions
 
 def write_to_csv(fieldnames, transactions, csv_file):
     with open(csv_file, 'w', newline='') as f:
