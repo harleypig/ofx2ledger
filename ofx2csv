@@ -13,10 +13,10 @@ def ewarn(*args):
     for message in args:
         print(message, file=sys.stderr)
 
-def eexit(**kwargs):
-    exit_code = kwargs.pop('exit_code', 1)
-    if kwargs:
-        ewarn(**kwargs)
+def eexit(*args):
+    exit_code = args[0] if args else 1
+    if args:
+        ewarn(*args[1:])
 
     sys.exit(exit_code)
 
