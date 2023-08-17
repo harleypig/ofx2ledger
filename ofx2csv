@@ -20,7 +20,7 @@ def extract_fieldnames_and_values(ofx_file):
     bankmsgs = ofx.bankmsgsrsv1
 
     # Extract the STMTTRNRS object
-    stmttrnrs = bankmsgs.stmttrnrs
+    stmttrnrs = bankmsgs.stmttrnrs[0]
 
     # Extract the STMTRS object
     stmtrs = stmttrnrs.stmtrs
