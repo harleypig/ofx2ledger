@@ -44,14 +44,11 @@ def build_array(ofx_file):
               vars(ofx.bankmsgsrsv1))
 
     for account in ofx.bankmsgsrsv1.stmttrnrs:
-        if hasattr(account, 'stmttrnrs'):
-            #stmttrnrs = response.stmttrnrs
-            print(f">{response.stmtrs.bankacctfrom.acctid}")
-
+        if hasattr(account, 'stmtrs'):
+            print(f">{account.stmtrs.bankacctfrom.acctid}")
         else:
-            print("Debug: response object does not have a 'stmttrnrs' attribute. Its current state is:", file=sys.stderr)
-            pprint(vars(response), stream=sys.stderr)
-            continue
+            eexit("DEBUG: Expected to find STMTRS but it's not there.",
+                  vars(account))
 
 #    # Extract the field names and values
 #    fieldnames = []
