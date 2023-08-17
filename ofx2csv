@@ -37,6 +37,10 @@ def build_array(ofx_file):
         eexit("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.",
               vars(ofx))
 
+    if not ofx.bankmsgsrsv1.stmttrnrs:
+        eexit("DEBUG: Expected to find at least one element in STMTTRNRS but it's not there.",
+              vars(ofx))
+
     for response in ofx.bankmsgsrsv1.stmttrnrs:
         # Check if the STMTTRNRS object exists before extracting it
         if hasattr(response, 'stmttrnrs'):
