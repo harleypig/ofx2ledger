@@ -5,6 +5,14 @@ import csv
 from ofxtools.Parser import OFXTree
 from pprint import pprint
 
+def ewarn(message):
+    print(message, file=sys.stderr)
+
+def eexit(message=None, exit_code=1):
+    if message:
+        ewarn(message)
+    sys.exit(exit_code)
+
 def parse_file(ofx_file):
     # Parse the OFX file
     parser = OFXTree()
