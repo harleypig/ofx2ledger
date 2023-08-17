@@ -27,8 +27,11 @@ def extract_fieldnames_and_values(ofx_file):
     # Extract the BANKMSGSRSV1 object
     bankmsgs = ofx.bankmsgsrsv1
 
-    # Extract the STMTTRNRS object
-    stmttrnrs = bankmsgs.stmttrnrs
+    # Check if the STMTTRNRS object exists before extracting it
+    if hasattr(bankmsgs, 'stmttrnrs'):
+        stmttrnrs = bankmsgs.stmttrnrs
+    else:
+        continue
 
     # Extract the STMTRS object
     stmtrs = stmttrnrs.stmtrs
