@@ -5,12 +5,13 @@ import csv
 from ofxtools.Parser import OFXTree
 from pprint import pprint
 
-def ewarn(message):
+def ewarn(**kwargs):
+    message = ' '.join([str(value) for value in kwargs.values()])
     print(message, file=sys.stderr)
 
-def eexit(message=None, exit_code=1):
-    if message:
-        ewarn(message)
+def eexit(exit_code=1, **kwargs):
+    if kwargs:
+        ewarn(**kwargs)
     sys.exit(exit_code)
 
 def parse_file(ofx_file):
