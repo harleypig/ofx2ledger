@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import csv
 from ofxtools.Parser import OFXTree
 
 def extract_fieldnames_and_values(ofx_file):
@@ -19,8 +20,6 @@ def extract_fieldnames_and_values(ofx_file):
     fieldnames = list(set(fieldnames))
 
     return fieldnames, transactions
-
-import csv
 
 def write_to_csv(fieldnames, transactions, csv_file):
     with open(csv_file, 'w', newline='') as f:
