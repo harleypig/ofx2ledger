@@ -29,13 +29,9 @@ def parse_file(ofx_file):
     parser.parse(ofx_file)
 
     # Convert the tree to an OFX object
-    return parser.convert()
+    ofx = parser.convert()
 
-#--------------------------------------------------------------------------
-def build_array(ofx_file):
-    ofx = parse_file(ofx_file)
-
-    if not hasattr(ofx, 'bankmsgsrsv1'):
+    if not ofx.bankmsgsrsv1:
         eexit("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.",
               vars(ofx))
 
@@ -43,11 +39,20 @@ def build_array(ofx_file):
         eexit("DEBUG: Expected to find at least one element in STMTTRNRS but it's not there.",
               vars(ofx.bankmsgsrsv1))
 
-    if not all(hasattr(account, 'stmtrs') for account in ofx.bankmsgsrsv1.stmttrnrs):
-        eexit("DEBUG: Expected to find STMTRS in all STMTTRNRS but it's not there.",
+    if not ofx.bankmsgsrsv1.stmttrnrs.stmtrs:
+        eexit("DEBUG: Expected to find at least one element in STMTRS but it's not there.",
               vars(ofx.bankmsgsrsv1.stmttrnrs))
-    for account in ofx.bankmsgsrsv1.stmttrnrs:
+
+    return ofx.bankmsgsrsv1
+
+#--------------------------------------------------------------------------
+def build_array(ofx_file):
+    ofx = parse_file(ofx_file)
+
+    for account in ofx.stmttrnrs:
         print(f">{account.stmtrs.bankacctfrom.acctid}")
+
+    eexit('Done')
 
 #    # Extract the field names and values
 #    fieldnames = []
