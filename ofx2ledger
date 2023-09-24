@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+
+# https://financialdataexchange.org/common/Uploaded%20files/OFX%20files/OFX%20Banking%20Specification%20v2.3.pdf
+# 11.13.1.1.2 Bank Message Set Response Messages
+# 11.13.1     Example: Statement Download
+
+# ??? Does MACU have an api token so I can automate downloading my ofx files?
+
+import sys
+from ofxtools.Parser import OFXTree
+#from pprint import pprint
+
+#-----------------------------------------------------------------------------
+# AIDER
+#
+# * Each function should be immediately preceded by a comment of dashed lines
+#   to column 78.
+# * Each function should have an up to date docstring that includes a short
+#   discussion of what it does, a minimal number of examples, it's expected
+#   inputs, and it's outputs.
+
+# * When creating or working on an existing function, the following
+#   requirements must be included in the work.
+#   + The function should be immediately preceded by a comment of dashed lines
+#     to column 78.
+#   + The function should have an up-to-date docstring that includes a short
+#     discussion of what the function does, a minimal number of examples, its
+#     expected inputs and its outputs.
+
+#-----------------------------------------------------------------------------
+def ewarn(*args):
+    for message in args:
+        print(message, file=sys.stderr)
+
+#-----------------------------------------------------------------------------
+def eexit(*args, exit_code=1):
+    if args:
+        ewarn(*args)
+    sys.exit(exit_code)
+
+#-----------------------------------------------------------------------------
+def parse_file(ofx_file):
+    # Parse the OFX file
+    parser = OFXTree()
+    parser.parse(ofx_file)
+
+    # Convert the tree to an OFX object
+    ofx = parser.convert()
+
+    if not ofx.bankmsgsrsv1:
+        eexit("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.",
+              vars(ofx))
+
+    #return ofx.bankmsgsrsv1
+    return ofx
+
+#-----------------------------------------------------------------------------
+if __name__ == "__main__":
+    #ofx_file = sys.argv[1]
+    #csv_file = sys.argv[2]
+    #ofx_file = 'test.ofx'
+    ofx_file = 'raw/AllMACUAccounts_2022.ofx'
+    ofx = parse_file(ofx_file)
