@@ -7,27 +7,26 @@ class Ledger:
 
     This class takes an optional filename as an argument and sets it to
     self.filename.  If no filename is passed, it checks for
-    $HOME/.hledger.journal and sets filename to that, otherwise it sets
-    filename to None.
+    DEFAULT_MAIN_LEDGER and sets filename to that, otherwise it raises a ValueError.
 
     Attributes:
         filename (str): The path to the ledger file.
     """
 
-    def __init__(self, filename=None):
+    DEFAULT_MAIN_LEDGER = os.path.expanduser("~/.hledger.journal")
+
+    def __init__(self, filename=DEFAULT_MAIN_LEDGER):
         """
         Initialize the Ledger object.
 
         This method sets the filename attribute. If no filename is passed, it
-        checks for $HOME/.hledger.journal and sets filename to that, otherwise
-        it sets filename to None.
+        checks for DEFAULT_MAIN_LEDGER and sets filename to that, otherwise
+        it raises a ValueError.
 
         Args:
-            filename (str, optional): The path to the ledger file. Defaults to None.
+            filename (str, optional): The path to the ledger file. Defaults to DEFAULT_MAIN_LEDGER.
         """
-        if filename:
+        if os.path.exists(filename):
             self.filename = filename
-        elif os.path.exists(os.path.expanduser("~/.hledger.journal")):
-            self.filename = os.path.expanduser("~/.hledger.journal")
         else:
-            self.filename = None
+            raise ValueError(f"File {filename} does not exist.")
