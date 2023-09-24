@@ -64,6 +64,7 @@ class OFX2Ledger:
         except Exception as e:
             raise Exception(f"Failed to parse OFX file: {ofx_file}. Exception: {e}")
 
+    #-------------------------------------------------------------------------
     def get_unique(self, keyname):
         """
         Get a list of unique values for a given key in the OFX object.
