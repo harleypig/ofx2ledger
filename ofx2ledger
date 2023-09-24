@@ -40,19 +40,34 @@ def eexit(*args, exit_code=1):
 
 #-----------------------------------------------------------------------------
 def parse_file(ofx_file):
-    # Parse the OFX file
-    parser = OFXTree()
-    parser.parse(ofx_file)
+    """
+    Parse the OFX file and convert it to an OFX object.
 
-    # Convert the tree to an OFX object
-    ofx = parser.convert()
+    This function attempts to parse the given OFX file and convert it to an
+    OFX object. If the parsing or conversion fails, it will exit the program
+    with an appropriate error message and the exception details.
 
-    if not ofx.bankmsgsrsv1:
-        eexit("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.",
-              vars(ofx))
+    Args:
+        ofx_file (str): The path to the OFX file to parse.
 
-    #return ofx.bankmsgsrsv1
-    return ofx
+    Returns:
+        OFX: The parsed and converted OFX object.
+    """
+    try:
+        # Parse the OFX file
+        parser = OFXTree()
+        parser.parse(ofx_file)
+
+        # Convert the tree to an OFX object
+        ofx = parser.convert()
+
+        if not ofx.bankmsgsrsv1:
+            eexit("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.",
+                  vars(ofx))
+
+        return ofx
+    except Exception as e:
+        eexit(f"Failed to parse and convert OFX file: {ofx_file}. Exception: {e}")
 
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
