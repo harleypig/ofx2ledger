@@ -22,67 +22,67 @@ from ofxtools.Parser import OFXTree
 #     discussion of what the function does, a minimal number of examples, its
 #     expected inputs and its outputs.
 
-#-----------------------------------------------------------------------------
-def parse_file(ofx_file):
+class OFX2Ledger:
     """
-    Parse the OFX file and convert it to an OFX object.
+    A class to parse an OFX file and provide unique values for a given key.
 
-    This function attempts to parse the given OFX file and convert it to an
-    OFX object. If the parsing or conversion fails, it will raise an exception
-    with an appropriate error message and the exception details.
+    This class takes a filename as an argument, parses the OFX file, and saves
+    the parsed output to self.ofx. It provides a method to get a list of unique
+    values for a given key in the OFX object.
 
-    Args:
-        ofx_file (str): The path to the OFX file to parse.
-
-    Returns:
-        OFX: The parsed and converted OFX object.
-
-    Raises:
-        ValueError: If the OFX object does not contain the BANKMSGSRSV1 field.
-        Exception: If any other error occurs during the parsing and conversion.
-    """
-    try:
-        # Parse the OFX file
-        parser = OFXTree()
-        parser.parse(ofx_file)
-
-        # Convert the tree to an OFX object
-        ofx = parser.convert()
-
-        if not ofx.bankmsgsrsv1:
-            raise ValueError("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.")
-
-        return ofx
-
-    except ValueError as ve:
-        raise ValueError(f"Failed to parse OFX file: {ofx_file}. Exception: {ve}")
-
-    except Exception as e:
-        raise Exception(f"Failed to parse OFX file: {ofx_file}. Exception: {e}")
-
-#-----------------------------------------------------------------------------
-def get_unique(ofx, keyname):
-    """
-    Get a list of unique values for a given key in the OFX object.
-
-    This function iterates over the transactions in the OFX object and adds the
-    value of the given key to a set, effectively collecting all unique values
-    for that key.
-
-    Args:
+    Attributes:
         ofx (OFX): The parsed and converted OFX object.
-        keyname (str): The key to search for in the OFX object.
-
-    Returns:
-        list: A list of unique values for the given key in the OFX object.
     """
-    unique_values = set()
 
-    for transaction in ofx.bankmsgsrsv1.stmttrnrs.stmtrs.banktranlist:
-        if hasattr(transaction, keyname):
-            unique_values.add(getattr(transaction, keyname))
+    def __init__(self, ofx_file):
+        """
+        Initialize the OFX2Ledger object.
 
-    return list(unique_values)
+        This method attempts to parse the given OFX file and convert it to an
+        OFX object. If the parsing or conversion fails, it will raise an exception
+        with an appropriate error message and the exception details.
+
+        Args:
+            ofx_file (str): The path to the OFX file to parse.
+        """
+        try:
+            # Parse the OFX file
+            parser = OFXTree()
+            parser.parse(ofx_file)
+
+            # Convert the tree to an OFX object
+            self.ofx = parser.convert()
+
+            if not self.ofx.bankmsgsrsv1:
+                raise ValueError("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.")
+
+        except ValueError as ve:
+            raise ValueError(f"Failed to parse OFX file: {ofx_file}. Exception: {ve}")
+
+        except Exception as e:
+            raise Exception(f"Failed to parse OFX file: {ofx_file}. Exception: {e}")
+
+    def get_unique(self, keyname):
+        """
+        Get a list of unique values for a given key in the OFX object.
+
+        This method iterates over the transactions in the OFX object and adds the
+        value of the given key to a set, effectively collecting all unique values
+        for that key.
+
+        Args:
+            keyname (str): The key to search for in the OFX object.
+
+        Returns:
+            list: A list of unique values for the given key in the OFX object.
+        """
+        unique_values = set()
+
+        for transaction in self.ofx.bankmsgsrsv1.stmttrnrs.stmtrs.banktranlist:
+            if hasattr(transaction, keyname):
+                unique_values.add(getattr(transaction, keyname))
+
+        return list(unique_values)
 
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
@@ -90,5 +90,5 @@ if __name__ == "__main__":
     #csv_file = sys.argv[2]
     #ofx_file = 'test.ofx'
     ofx_file = 'raw/AllMACUAccounts_2022.ofx'
-    ofx = parse_file(ofx_file)
-    print(get_unique(ofx,'ACCTID'))
+    ofx2ledger = OFX2Ledger(ofx_file)
+    print(ofx2ledger.get_unique('ACCTID'))
