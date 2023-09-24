@@ -84,27 +84,24 @@ class OFX2Ledger:
             raise Exception(f"Failed to parse OFX file: {ofx_file}. Exception: {e}")
 
     #-------------------------------------------------------------------------
-    def get_unique(self, keyname):
+    def get_unique_accounts(self):
         """
-        Get a list of unique values for a given key in the OFX object.
+        Get a list of unique account ids and types in the OFX object.
 
-        This method iterates over the transactions in the OFX object and adds the
-        value of the given key to a set, effectively collecting all unique values
-        for that key.
-
-        Args:
-            keyname (str): The key to search for in the OFX object.
+        This method iterates over the statements in the OFX object and adds the
+        account id and type to a set, effectively collecting all unique account ids
+        and types.
 
         Returns:
-            list: A list of unique values for the given key in the OFX object.
+            list: A list of tuples, where each tuple contains a unique account id
+            and type in the OFX object.
         """
-        unique_values = set()
+        unique_accounts = set()
 
-        for transaction in self.ofx.bankmsgsrsv1.stmttrnrs.stmtrs.banktranlist:
-            if hasattr(transaction, keyname):
-                unique_values.add(getattr(transaction, keyname))
+        for statement in self.ofx.statements:
+            unique_accounts.add((statement.acctid, statement.accttype))
 
-        return list(unique_values)
+        return list(unique_accounts)
 
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
