@@ -1,0 +1,14 @@
+------------------------------------------------------------------------------
+Instructions for AIDER
+
+* When creating or working on an existing function, the following
+  requirements must be included in the work.
+  + The function should be immediately preceded by a comment of dashed lines
+    to column 78.
+  + The function should have an up-to-date docstring that includes a short
+    discussion of what the function does, a minimal number of examples, its
+    expected inputs and its outputs.
+* Any changes made to the file must be broken out into as small a change
+  commit as makes sense for the change. E.g., changes should be kept to
+  a single function per commit, documentation changes should be a separate
+  commit, etc.
