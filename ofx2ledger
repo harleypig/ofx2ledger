@@ -6,7 +6,6 @@
 
 # ??? Does MACU have an api token so I can automate downloading my ofx files?
 
-import sys
 from ofxtools.Parser import OFXTree
 #from pprint import pprint
 
@@ -15,22 +14,13 @@ from ofxtools.Parser import OFXTree
 #
 # * When creating or working on an existing function, the following
 #   requirements must be included in the work.
+#   + These changes should be made as a separate commit after functional
+#     changes have been made.
 #   + The function should be immediately preceded by a comment of dashed lines
 #     to column 78.
 #   + The function should have an up-to-date docstring that includes a short
 #     discussion of what the function does, a minimal number of examples, its
 #     expected inputs and its outputs.
-
-#-----------------------------------------------------------------------------
-def ewarn(*args):
-    for message in args:
-        print(message, file=sys.stderr)
-
-#-----------------------------------------------------------------------------
-def eexit(*args, exit_code=1):
-    if args:
-        ewarn(*args)
-    sys.exit(exit_code)
 
 #-----------------------------------------------------------------------------
 def parse_file(ofx_file):
@@ -65,13 +55,13 @@ def parse_file(ofx_file):
         return ofx
 
     except ValueError as ve:
-        raise ValueError(f"Failed to parse and convert OFX file: {ofx_file}. Exception: {ve}")
+        raise ValueError(f"Failed to parse OFX file: {ofx_file}. Exception: {ve}")
 
     except Exception as e:
-        raise Exception(f"Failed to parse and convert OFX file: {ofx_file}. Exception: {e}")
+        raise Exception(f"Failed to parse OFX file: {ofx_file}. Exception: {e}")
 
 #-----------------------------------------------------------------------------
-def get_unique_values(ofx, keyname):
+def get_unique(ofx, keyname):
     """
     Get a list of unique values for a given key in the OFX object.
 
@@ -101,3 +91,4 @@ if __name__ == "__main__":
     #ofx_file = 'test.ofx'
     ofx_file = 'raw/AllMACUAccounts_2022.ofx'
     ofx = parse_file(ofx_file)
+    print(get_unique(ofx,'ACCTID'))
