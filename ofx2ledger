@@ -71,6 +71,30 @@ def parse_file(ofx_file):
         raise Exception(f"Failed to parse and convert OFX file: {ofx_file}. Exception: {e}")
 
 #-----------------------------------------------------------------------------
+def get_unique_values(ofx, keyname):
+    """
+    Get a list of unique values for a given key in the OFX object.
+
+    This function iterates over the transactions in the OFX object and adds the
+    value of the given key to a set, effectively collecting all unique values
+    for that key.
+
+    Args:
+        ofx (OFX): The parsed and converted OFX object.
+        keyname (str): The key to search for in the OFX object.
+
+    Returns:
+        list: A list of unique values for the given key in the OFX object.
+    """
+    unique_values = set()
+
+    for transaction in ofx.bankmsgsrsv1.stmttrnrs.stmtrs.banktranlist:
+        if hasattr(transaction, keyname):
+            unique_values.add(getattr(transaction, keyname))
+
+    return list(unique_values)
+
+#-----------------------------------------------------------------------------
 if __name__ == "__main__":
     #ofx_file = sys.argv[1]
     #csv_file = sys.argv[2]
