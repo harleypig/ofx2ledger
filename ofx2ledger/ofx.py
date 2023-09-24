@@ -9,6 +9,7 @@
 from ofxtools.Parser import OFXTree
 #from pprint import pprint
 
+# ----------------------------------------------------------------------------
 class OFX2Ledger:
     """
     A class to parse an OFX file and provide unique values for a given key.

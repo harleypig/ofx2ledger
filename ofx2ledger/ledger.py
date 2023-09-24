@@ -1,5 +1,6 @@
 import os
 
+# ----------------------------------------------------------------------------
 class Ledger:
     """
     A class to handle ledger files.
