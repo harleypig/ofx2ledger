@@ -66,6 +66,7 @@ def parse_file(ofx_file):
                   vars(ofx))
 
         return ofx
+
     except Exception as e:
         eexit(f"Failed to parse and convert OFX file: {ofx_file}. Exception: {e}")
 
