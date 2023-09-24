@@ -13,12 +13,6 @@ from ofxtools.Parser import OFXTree
 #-----------------------------------------------------------------------------
 # AIDER
 #
-# * Each function should be immediately preceded by a comment of dashed lines
-#   to column 78.
-# * Each function should have an up to date docstring that includes a short
-#   discussion of what it does, a minimal number of examples, it's expected
-#   inputs, and it's outputs.
-
 # * When creating or working on an existing function, the following
 #   requirements must be included in the work.
 #   + The function should be immediately preceded by a comment of dashed lines
@@ -72,6 +66,7 @@ def parse_file(ofx_file):
 
     except ValueError as ve:
         raise ValueError(f"Failed to parse and convert OFX file: {ofx_file}. Exception: {ve}")
+
     except Exception as e:
         raise Exception(f"Failed to parse and convert OFX file: {ofx_file}. Exception: {e}")
 
