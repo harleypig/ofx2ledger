@@ -37,6 +37,19 @@ class OFX2Ledger:
     """
 
     #-------------------------------------------------------------------------
+    def __init__(self, ofx_file):
+        """
+        Initialize the OFX2Ledger object.
+
+        This method calls the _parse_ofx_file method to parse the given OFX file
+        and convert it to an OFX object.
+
+        Args:
+            ofx_file (str): The path to the OFX file to parse.
+        """
+        self.ofx = self._parse_ofx_file(ofx_file)
+
+    #-------------------------------------------------------------------------
     def _parse_ofx_file(self, ofx_file):
         """
         Parse the given OFX file and convert it to an OFX object.
@@ -69,19 +82,6 @@ class OFX2Ledger:
 
         except Exception as e:
             raise Exception(f"Failed to parse OFX file: {ofx_file}. Exception: {e}")
-
-    #-------------------------------------------------------------------------
-    def __init__(self, ofx_file):
-        """
-        Initialize the OFX2Ledger object.
-
-        This method calls the _parse_ofx_file method to parse the given OFX file
-        and convert it to an OFX object.
-
-        Args:
-            ofx_file (str): The path to the OFX file to parse.
-        """
-        self.ofx = self._parse_ofx_file(ofx_file)
 
     #-------------------------------------------------------------------------
     def get_unique(self, keyname):
