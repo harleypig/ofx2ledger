@@ -36,9 +36,10 @@ class OFX2Ledger:
         ofx (OFX): The parsed and converted OFX object.
     """
 
-    def __init__(self, ofx_file):
+    #-------------------------------------------------------------------------
+    def _parse_ofx_file(self, ofx_file):
         """
-        Initialize the OFX2Ledger object.
+        Parse the given OFX file and convert it to an OFX object.
 
         This method attempts to parse the given OFX file and convert it to an
         OFX object. If the parsing or conversion fails, it will raise an exception
@@ -46,6 +47,9 @@ class OFX2Ledger:
 
         Args:
             ofx_file (str): The path to the OFX file to parse.
+
+        Returns:
+            OFX: The parsed and converted OFX object.
         """
         try:
             # Parse the OFX file
@@ -53,16 +57,31 @@ class OFX2Ledger:
             parser.parse(ofx_file)
 
             # Convert the tree to an OFX object
-            self.ofx = parser.convert()
+            ofx = parser.convert()
 
-            if not self.ofx.bankmsgsrsv1:
+            if not ofx.bankmsgsrsv1:
                 raise ValueError("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.")
+
+            return ofx
 
         except ValueError as ve:
             raise ValueError(f"Failed to parse OFX file: {ofx_file}. Exception: {ve}")
 
         except Exception as e:
             raise Exception(f"Failed to parse OFX file: {ofx_file}. Exception: {e}")
+
+    #-------------------------------------------------------------------------
+    def __init__(self, ofx_file):
+        """
+        Initialize the OFX2Ledger object.
+
+        This method calls the _parse_ofx_file method to parse the given OFX file
+        and convert it to an OFX object.
+
+        Args:
+            ofx_file (str): The path to the OFX file to parse.
+        """
+        self.ofx = self._parse_ofx_file(ofx_file)
 
     #-------------------------------------------------------------------------
     def get_unique(self, keyname):
