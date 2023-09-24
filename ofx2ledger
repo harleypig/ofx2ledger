@@ -44,7 +44,7 @@ def parse_file(ofx_file):
     Parse the OFX file and convert it to an OFX object.
 
     This function attempts to parse the given OFX file and convert it to an
-    OFX object. If the parsing or conversion fails, it will exit the program
+    OFX object. If the parsing or conversion fails, it will raise an exception
     with an appropriate error message and the exception details.
 
     Args:
@@ -52,6 +52,10 @@ def parse_file(ofx_file):
 
     Returns:
         OFX: The parsed and converted OFX object.
+
+    Raises:
+        ValueError: If the OFX object does not contain the BANKMSGSRSV1 field.
+        Exception: If any other error occurs during the parsing and conversion.
     """
     try:
         # Parse the OFX file
@@ -62,13 +66,14 @@ def parse_file(ofx_file):
         ofx = parser.convert()
 
         if not ofx.bankmsgsrsv1:
-            eexit("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.",
-                  vars(ofx))
+            raise ValueError("DEBUG: Expected to find BANKMSGSRSV1 but it's not there.")
 
         return ofx
 
+    except ValueError as ve:
+        raise ValueError(f"Failed to parse and convert OFX file: {ofx_file}. Exception: {ve}")
     except Exception as e:
-        eexit(f"Failed to parse and convert OFX file: {ofx_file}. Exception: {e}")
+        raise Exception(f"Failed to parse and convert OFX file: {ofx_file}. Exception: {e}")
 
 #-----------------------------------------------------------------------------
 if __name__ == "__main__":
