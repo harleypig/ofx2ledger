@@ -1,7 +1,8 @@
 import os
+from ledger_template import LedgerTemplate
 
 ##############################################################################
-class Ledger:
+class Ledger(LedgerTemplate):
     """
     A class to get information about ledger files.
 
