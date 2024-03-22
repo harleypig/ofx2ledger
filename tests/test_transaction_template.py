@@ -13,7 +13,7 @@ def load_samples():
 
 def render_transaction(transaction_data):
     template = env.get_template('transaction.j2')
-    return template.render(transaction=transaction_data).strip()
+    return template.render(transaction=transaction_data, indent='  ').strip()
 
 @pytest.mark.parametrize("sample", load_samples())
 def test_transaction_template(sample):
