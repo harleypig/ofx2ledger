@@ -2,16 +2,17 @@
 {%- if transaction_status %} {{ transaction_status }}{%- endif %}
 {%- if transaction_code %} {{ transaction_code }}{%- endif %}
 {%- if transaction_description %} {{ transaction_description }}{%- endif %}
-{% if transaction_tags %}
+{% if transaction_tags -%}
 {% for key, value in transaction_tags.items() %}
 {{ indent }}; {{ key }}: {{ value }}
 {% endfor %}
 {% endif %}
-{% if transaction_comments %}
+{% if transaction_comments -%}
 {% for comment in transaction_comments %}
 {{ '  ' }}; {{ comment }}
 {% endfor %}
 {% endif %}
+
 
 {% if posting_status %}{{ posting_status }} {% endif %}{{ posting_account_name }} {{ posting_amount | string }}
 {% for comment, tag in posting_comments_tags %}
