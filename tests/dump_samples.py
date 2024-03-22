@@ -13,8 +13,8 @@ with open('transaction_samples.yaml', 'r') as file:
     samples = yaml.safe_load(file)
 
 for sample in samples['transaction_samples']:
-    sample['expected_output'] = """{}""".format(render_transaction(sample['transaction_data']))
+    sample['expected_output'] = render_transaction(sample['transaction_data'])
 
 with open('temp.yaml', 'w') as file:
-    yaml.dump(samples, file)
+    yaml.dump(samples, file, default_flow_style=False, allow_unicode=True)
 
