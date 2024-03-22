@@ -1,4 +1,9 @@
-{{ transaction_date }}{% if transaction_status %} {{ transaction_status }}{% endif %}{% if transaction_code %} {{ transaction_code }}{% endif %}{% if transaction_description %} {{ transaction_description }}{% endif %}{% if transaction_comment or transaction_tag %} ; {{ transaction_comment or '' }}{% if transaction_tag %} | {{ transaction_tag }}{% endif %}{% endif %}
+{{ transaction_date }}
+{%- if transaction_status %} {{ transaction_status }}{%- endif %}
+{%- if transaction_code %} {{ transaction_code }}{%- endif %}
+{%- if transaction_description %} {{ transaction_description }}{%- endif %}
+{%- if transaction_comment or transaction_tag %}{% indent %}; {{ transaction_comment or '' }}
+{%- if transaction_tag %} | {{ transaction_tag }}{%- endif %}{%- endif %}
 {% for comment, tag in transaction_comments_tags %}
 {{ '  ' }}; {{ comment }}{% if tag %} | {{ tag }}{% endif %}
 {% endfor %}
