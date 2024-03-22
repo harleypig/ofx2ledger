@@ -26,27 +26,33 @@ def render_transaction(transaction_data):
 def test_transaction_template(transaction_data):
     result = render_transaction(transaction_data)
     assert isinstance(result, str)
-    assert '2023-04-01' in result
-    assert 'Assets:Bank' in result
-    assert '100 USD' in result
+    # Check the format of the transaction line
+    transaction_line = result.split('\n')[0]
+    assert transaction_line.startswith(transaction_data['date'])
     if 'status' in transaction_data:
-        assert transaction_data['status'] in result
+        assert f" {transaction_data['status']}" in transaction_line
     if 'code' in transaction_data:
-        assert transaction_data['code'] in result
+        assert f" {transaction_data['code']}" in transaction_line
     if 'description' in transaction_data:
-        assert transaction_data['description'] in result
+        assert f" {transaction_data['description']}" in transaction_line
+    # Check the format of tags and comments
     if 'tags' in transaction_data:
         for key, value in transaction_data['tags'].items():
-            assert f"{key}: {value}" in result
+            assert f"\n  ; {key}: {value}" in result
     if 'comments' in transaction_data:
         for comment in transaction_data['comments']:
-            assert comment in result
+            assert f"\n  ; {comment}" in result
+    # Check the format of postings
     for posting in transaction_data['postings']:
+        posting_line = f"\n  {posting['account_name']}"
         if 'status' in posting:
-            assert posting['status'] in result
+            posting_line = f"\n  {posting['status']} {posting_line.lstrip()}"
+        if 'amount' in posting:
+            posting_line += f"  {posting['amount']}"
+        assert posting_line in result
         if 'tags' in posting:
             for key, value in posting['tags'].items():
-                assert f"{key}: {value}" in result
+                assert f"\n  ; {key}: {value}" in result
         if 'comments' in posting:
             for comment in posting['comments']:
-                assert comment in result
+                assert f"\n  ; {comment}" in result
