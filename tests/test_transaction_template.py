@@ -12,17 +12,23 @@ def render_transaction(transaction_data):
 
 @pytest.mark.parametrize("transaction_data", [
     # All possible combinations of transaction with minimal posting entry
-    {'date': '2023-04-01', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100 USD'}]},
-    {'date': '2023-04-01', 'status': '!', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100 USD'}]},
-    {'date': '2023-04-01', 'code': 'INV123', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100 USD'}]},
-    {'date': '2023-04-01', 'description': 'Invoice Payment', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100 USD'}]},
-    {'date': '2023-04-01', 'tags': {'Payee': 'Client A'}, 'postings': [{'account_name': 'Assets:Bank', 'amount': '100 USD'}]},
-    {'date': '2023-04-01', 'comments': ['Payment received'], 'postings': [{'account_name': 'Assets:Bank', 'amount': '100 USD'}]},
+    {'date': '2023-04-01', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00'}]},
+    {'date': '2023-04-01', 'status': '!', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00'}]},
+    {'date': '2023-04-01', 'code': 'INV123', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00'}]},
+    {'date': '2023-04-01', 'description': 'Invoice Payment', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00'}]},
+    {'date': '2023-04-01', 'tags': {'Payee': 'Client A'}, 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00'}]},
+    {'date': '2023-04-01', 'comments': ['Payment received'], 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00'}]},
     # All possible combinations of postings with minimal transaction line
-    {'date': '2023-04-01', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100 USD', 'status': '!'}]},
-    {'date': '2023-04-01', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100 USD', 'tags': {'Category': 'Income'}}]},
-    {'date': '2023-04-01', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100 USD', 'comments': ['Deposit']}]}
+    {'date': '2023-04-01', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00', 'status': '!'}]},
+    {'date': '2023-04-01', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00', 'tags': {'Category': 'Income'}}]},
+    {'date': '2023-04-01', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00', 'comments': ['Deposit']}]}
 ])
+
+# First entry above should produce this:
+# 2023-04-01
+#
+#   Assets:Bank  100.00
+
 def test_transaction_template(transaction_data):
     result = render_transaction(transaction_data)
     assert isinstance(result, str)
