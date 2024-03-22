@@ -1,14 +1,14 @@
-{{ transaction_date }}
-{%- if transaction_status %} {{ transaction_status }}{%- endif %}
-{%- if transaction_code %} {{ transaction_code }}{%- endif %}
-{%- if transaction_description %} {{ transaction_description }}{%- endif %}
-{% if transaction_tags -%}
-{% for key, value in transaction_tags.items() %}
+{{ transaction.date }}
+{%- if transaction.status %} {{ transaction.status }}{%- endif %}
+{%- if transaction.code %} {{ transaction.code }}{%- endif %}
+{%- if transaction.description %} {{ transaction.description }}{%- endif %}
+{% if transaction.tags -%}
+{% for key, value in transaction.tags.items() %}
 {{ indent }}; {{ key }}: {{ value }}
 {% endfor %}
 {% endif %}
-{% if transaction_comments -%}
-{% for comment in transaction_comments %}
+{% if transaction.comments -%}
+{% for comment in transaction.comments %}
 {{ '  ' }}; {{ comment }}
 {% endfor %}
 {% endif %}
