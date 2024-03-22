@@ -1,0 +1,65 @@
+transaction_samples:
+  - transaction_data:
+      date: '2023-04-01'
+      postings:
+        - account_name: 'Assets:Bank'
+          amount: '100.00'
+    expected_output: "2023-04-01\n\n  Assets:Bank  100.00\n"
+  - transaction_data:
+      date: '2023-04-01'
+      status: '!'
+      postings:
+        - account_name: 'Assets:Bank'
+          amount: '100.00'
+    expected_output: "2023-04-01 !\n\n  Assets:Bank  100.00\n"
+  - transaction_data:
+      date: '2023-04-01'
+      code: 'INV123'
+      postings:
+        - account_name: 'Assets:Bank'
+          amount: '100.00'
+    expected_output: "2023-04-01 INV123\n\n  Assets:Bank  100.00\n"
+  - transaction_data:
+      date: '2023-04-01'
+      description: 'Invoice Payment'
+      postings:
+        - account_name: 'Assets:Bank'
+          amount: '100.00'
+    expected_output: "2023-04-01 Invoice Payment\n\n  Assets:Bank  100.00\n"
+  - transaction_data:
+      date: '2023-04-01'
+      tags:
+        Payee: 'Client A'
+      postings:
+        - account_name: 'Assets:Bank'
+          amount: '100.00'
+    expected_output: "2023-04-01\n  ; Payee: Client A\n\n  Assets:Bank  100.00\n"
+  - transaction_data:
+      date: '2023-04-01'
+      comments: ['Payment received']
+      postings:
+        - account_name: 'Assets:Bank'
+          amount: '100.00'
+    expected_output: "2023-04-01\n  ; Payment received\n\n  Assets:Bank  100.00\n"
+  - transaction_data:
+      date: '2023-04-01'
+      postings:
+        - account_name: 'Assets:Bank'
+          amount: '100.00'
+          status: '!'
+    expected_output: "2023-04-01\n\n! Assets:Bank  100.00\n"
+  - transaction_data:
+      date: '2023-04-01'
+      postings:
+        - account_name: 'Assets:Bank'
+          amount: '100.00'
+          tags:
+            Category: 'Income'
+    expected_output: "2023-04-01\n\n  Assets:Bank  100.00\n  ; Category: Income\n"
+  - transaction_data:
+      date: '2023-04-01'
+      postings:
+        - account_name: 'Assets:Bank'
+          amount: '100.00'
+          comments: ['Deposit']
+    expected_output: "2023-04-01\n\n  Assets:Bank  100.00\n  ; Deposit\n"
