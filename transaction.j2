@@ -1,23 +1,29 @@
 {{ transaction.date }}
-{%- if transaction.status %} {{ transaction.status }}{%- endif %}
-{%- if transaction.code %} {{ transaction.code }}{%- endif %}
-{%- if transaction.description %} {{ transaction.description }}{%- endif %}
+{%- if transaction.status %} {{ transaction.status }}{% endif -%}
+{%- if transaction.code %} {{ transaction.code }}{% endif -%}
+{%- if transaction.description %} {{ transaction.description }}{% endif -%}
 {% if transaction.tags -%}
-{% for key, value in transaction.tags.items() %}
+{% for key, value in transaction.tags.items() -%}
 {{ indent }}; {{ key }}: {{ value }}
-{% endfor %}
-{% endif %}
+{%- endfor %}
+{%- endif -%}
 {% if transaction.comments -%}
-{% for comment in transaction.comments %}
-{{ '  ' }}; {{ comment }}
-{% endfor %}
-{% endif %}
-
-
-
+{% for comment in transaction.comments -%}
+{{ indent }}; {{ comment }}
+{%- endfor %}
+{%- endif -%}
 {% for posting in transaction.postings %}
-{{ posting.status }} {{ posting.account_name }} {{ posting.amount | string }}
-  {%- for comment, tag in posting.comments_tags %}
-  ; {{ comment }}{% if tag %} | {{ tag }}{% endif %}
-  {% endfor %}
-{% endfor %}
+{{ indent }}
+{%- if posting.status %}{{ posting.status }}{% endif -%}
+{{ posting.account_name }}
+{%- if posting.amount %}{{ indent }}{{ posting.amount }}{% endif %}
+{% if posting.tags -%}
+{% for key, value in posting.tags.items() -%}
+{{ indent }}; {{ key }}: {{ value }}
+{%- endfor %}
+{%- endif -%}
+{% if posting.comments -%}
+{% for comment in posting.comments -%}
+{{ indent }}; {{ comment }}
+{%- endfor %}
+{%- endif -%}
