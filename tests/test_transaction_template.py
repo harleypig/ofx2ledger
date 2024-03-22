@@ -1,7 +1,16 @@
 import pytest
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import yaml
+from yaml.representer import SafeRepresenter
+import yaml
 import os
+
+def literal_presenter(dumper, data):
+    if '\n' in data:
+        return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|')
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data)
+
+yaml.add_representer(str, literal_presenter)
 
 env = Environment(
     loader=FileSystemLoader('.'),
