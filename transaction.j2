@@ -1,9 +1,9 @@
-{{ transaction_date }} {{ transaction_status or '' }} {{ transaction_code or '' }} {{ transaction_description or '' }}{% if transaction_comment or transaction_tag %} ; {{ transaction_comment or '' }}{% if transaction_tag %} | {{ transaction_tag }}{% endif %}{% endif %}
+{{ transaction_date }}{% if transaction_status %} {{ transaction_status }}{% endif %}{% if transaction_code %} {{ transaction_code }}{% endif %}{% if transaction_description %} {{ transaction_description }}{% endif %}{% if transaction_comment or transaction_tag %} ; {{ transaction_comment or '' }}{% if transaction_tag %} | {{ transaction_tag }}{% endif %}{% endif %}
 {% for comment, tag in transaction_comments_tags %}
 {{ '  ' }}; {{ comment }}{% if tag %} | {{ tag }}{% endif %}
 {% endfor %}
 
-{{ posting_status or '' }} {{ posting_account_name }} {{ posting_amount | string }}
+{% if posting_status %}{{ posting_status }} {% endif %}{{ posting_account_name }} {{ posting_amount | string }}
 {% for comment, tag in posting_comments_tags %}
 {{ '  ' }}; {{ comment }}{% if tag %} | {{ tag }}{% endif %}
 {% endfor %}
