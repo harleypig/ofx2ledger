@@ -1,3 +1,12 @@
+.aider*
+!.aider.conf.yml
+!.aiderignore
+
+venv/**
+raw/**
+
+*.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

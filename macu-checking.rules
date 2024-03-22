@@ -1,0 +1,20 @@
+skip 1
+
+# There can't be any spaces in field names. Run the following on the csv file:
+# sed -i '1s/ /_/g' file.csv
+
+fields "Transaction_ID","Posting_Date","Effective_Date","Transaction_Type","Amount","Check_Number","Reference_Number","Description","Transaction_Category","Type","Balance","Memo","Extended_Description"
+
+#"20230505 312649 30,000 12,857,254","5/5/2023","5/5/2023","Credit","300.00000","","2206878284","Deposit Transfer","Transfers","Transfer","1461.06000","","Deposit Transfer"
+
+date %Posting_Date
+date-format %-m/%-d/%Y
+currency $
+
+account1 Assets:Checking
+account2 Expenses:Unknown
+
+description %Description
+comment %Extended_Description
+
+amount %Amount
