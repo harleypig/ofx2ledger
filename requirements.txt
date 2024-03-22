@@ -1,3 +1,4 @@
 ofxtools
 Jinja2
 pytest
+PyYAML
