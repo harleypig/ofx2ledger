@@ -1,7 +1,7 @@
 import pytest
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-env = Environment(loader=FileSystemLoader('path/to/your/templates'),
+env = Environment(loader=FileSystemLoader('path/to/templates'),
                   autoescape=select_autoescape(['html', 'xml', 'j2']))
 
 
