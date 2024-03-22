@@ -6,6 +6,32 @@ env = Environment(
     autoescape=select_autoescape(['html', 'xml', 'j2'])
 )
 
+@pytest.mark.parametrize("transaction_data, expected_output", [
+    (
+        {'date': '2023-04-01', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00'}]},
+        "2023-04-01\n\n  Assets:Bank  100.00\n"
+    ),
+    (
+        {'date': '2023-04-01', 'status': '!', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00'}]},
+        "2023-04-01 !\n\n  Assets:Bank  100.00\n"
+    ),
+    (
+        {'date': '2023-04-01', 'code': 'INV123', 'postings': [{'account_name': 'Assets:Bank', 'amount': '100.00'}]},
+        "2023-04-01 INV123\n\n  Assets:Bank  100.00\n"
+    ),
+    # ... (additional test cases with their expected output)
+])
+
+def test_transaction_template(transaction_data, expected_output):
+    result = render_transaction(transaction_data)
+    assert isinstance(result, str)
+    # Check the format of the transaction line
+    # ... (existing checks for the transaction line)
+    # Check the format of tags and comments
+    # ... (existing checks for tags and comments)
+    # Check the format of postings
+    # ... (existing checks for postings)
+    assert result == expected_output
 def render_transaction(transaction_data):
     template = env.get_template('transaction.j2')
     return template.render(transaction=transaction_data).strip()
