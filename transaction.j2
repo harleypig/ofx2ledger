@@ -14,7 +14,10 @@
 {% endif %}
 
 
-{% if posting_status %}{{ posting_status }} {% endif %}{{ posting_account_name }} {{ posting_amount | string }}
-{% for comment, tag in posting_comments_tags %}
-{{ '  ' }}; {{ comment }}{% if tag %} | {{ tag }}{% endif %}
+
+{% for posting in transaction.postings %}
+{{ posting.status }} {{ posting.account_name }} {{ posting.amount | string }}
+  {%- for comment, tag in posting.comments_tags %}
+  ; {{ comment }}{% if tag %} | {{ tag }}{% endif %}
+  {% endfor %}
 {% endfor %}
