@@ -52,7 +52,10 @@ for sample in samples:
     sample['expected_output'] = render_transaction(sample['transaction_data'])
 
 with open('temp.yaml', 'w') as file:
-    yaml.dump(samples,
+    yaml.dump(samples, file,
+              default_flow_style=False,
+              allow_unicode=True,
+              sort_keys=False)
               file,
               default_flow_style=False,
               allow_unicode=True)
