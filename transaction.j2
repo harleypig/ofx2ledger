@@ -4,7 +4,7 @@
 {%- if transaction_description %} {{ transaction_description }}{%- endif %}
 {% if transaction_tags %}
 {% for key, value in transaction_tags.items() %}
-{{ '  ' }}{{ key }}: {{ value }}
+{{ indent }}; {{ key }}: {{ value }}
 {% endfor %}
 {% endif %}
 {% if transaction_comments %}
