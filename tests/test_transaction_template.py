@@ -90,6 +90,7 @@ env = Environment(loader=FileSystemLoader('path/to/your/templates'),
             }]
         }, "string")
     ])
+
 def test_transaction_template(transaction_data, expected_output):
     result = render_transaction(transaction_data)
     assert isinstance(result, str)
