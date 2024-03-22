@@ -29,7 +29,7 @@ def render_transaction(transaction_data):
 #
 #   Assets:Bank  100.00
 
-def test_transaction_template(transaction_data):
+def test_transaction_template(transaction_data, expected_output):
     result = render_transaction(transaction_data)
     assert isinstance(result, str)
     # Check the format of the transaction line
