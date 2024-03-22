@@ -3,7 +3,12 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import yaml
 import os
 
-env = Environment(loader=FileSystemLoader('.'),
+env = Environment(
+    loader=FileSystemLoader('.'),
+    autoescape=select_autoescape(['html', 'xml', 'j2']),
+    lstrip_blocks=False,
+    trim_blocks=False
+)
                   autoescape=select_autoescape(['html', 'xml', 'j2']))
 
 def load_samples():

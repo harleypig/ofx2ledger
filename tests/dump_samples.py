@@ -2,7 +2,12 @@ import yaml
 import os
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), '..')),
+env = Environment(
+    loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), '..')),
+    autoescape=select_autoescape(['html', 'xml', 'j2']),
+    lstrip_blocks=False,
+    trim_blocks=False
+)
                   autoescape=select_autoescape(['html', 'xml', 'j2']))
 
 def render_transaction(transaction_data):
