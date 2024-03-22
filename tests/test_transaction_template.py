@@ -23,7 +23,7 @@ env = Environment(
 def load_samples():
     with open(os.path.join(os.path.dirname(__file__), 'transaction_samples.yaml'), 'r') as file:
         samples = yaml.safe_load(file)
-    return samples['transaction_samples']
+    return samples
 
 def render_transaction(transaction_data):
     template = env.get_template('transaction.j2')

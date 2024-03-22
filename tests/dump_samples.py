@@ -30,10 +30,10 @@ def render_transaction(transaction_data):
 
 
 with open('transaction_samples.yaml', 'r') as file:
-    samples = yaml.safe_load(file)
+    samples = yaml.safe_load(file)['transaction_samples']
 
-for sample in samples['transaction_samples']:
+for sample in samples:
     sample['expected_output'] = render_transaction(sample['transaction_data'])
 
 with open('temp.yaml', 'w') as file:
-    yaml.dump(samples, file, default_flow_style=False, allow_unicode=True)
+    yaml.dump({'transaction_samples': samples}, file, default_flow_style=False, allow_unicode=True)
