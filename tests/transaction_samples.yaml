@@ -1,10 +1,15 @@
 transaction_samples:
+  - name: simple-transaction
+  - name: posting-flagged-transaction
+  - name: posting-tagged-transaction
+  - name: posting-commented-transaction
   - transaction_data:
       date: '2023-04-01'
       postings:
         - account_name: 'Assets:Bank'
           amount: '100.00'
     expected_output: "2023-04-01\n\n  Assets:Bank  100.00\n"
+  - name: flagged-transaction
   - transaction_data:
       date: '2023-04-01'
       status: '!'
@@ -12,6 +17,7 @@ transaction_samples:
         - account_name: 'Assets:Bank'
           amount: '100.00'
     expected_output: "2023-04-01 !\n\n  Assets:Bank  100.00\n"
+  - name: coded-transaction
   - transaction_data:
       date: '2023-04-01'
       code: 'INV123'
@@ -19,6 +25,7 @@ transaction_samples:
         - account_name: 'Assets:Bank'
           amount: '100.00'
     expected_output: "2023-04-01 INV123\n\n  Assets:Bank  100.00\n"
+  - name: described-transaction
   - transaction_data:
       date: '2023-04-01'
       description: 'Invoice Payment'
@@ -26,6 +33,7 @@ transaction_samples:
         - account_name: 'Assets:Bank'
           amount: '100.00'
     expected_output: "2023-04-01 Invoice Payment\n\n  Assets:Bank  100.00\n"
+  - name: tagged-transaction
   - transaction_data:
       date: '2023-04-01'
       tags:
@@ -34,6 +42,7 @@ transaction_samples:
         - account_name: 'Assets:Bank'
           amount: '100.00'
     expected_output: "2023-04-01\n  ; Payee: Client A\n\n  Assets:Bank  100.00\n"
+  - name: commented-transaction
   - transaction_data:
       date: '2023-04-01'
       comments: ['Payment received']
@@ -41,6 +50,9 @@ transaction_samples:
         - account_name: 'Assets:Bank'
           amount: '100.00'
     expected_output: "2023-04-01\n  ; Payment received\n\n  Assets:Bank  100.00\n"
+  - name: posting-flagged-transaction
+  - name: posting-tagged-transaction
+  - name: posting-commented-transaction
   - transaction_data:
       date: '2023-04-01'
       postings:
@@ -48,6 +60,9 @@ transaction_samples:
           amount: '100.00'
           status: '!'
     expected_output: "2023-04-01\n\n! Assets:Bank  100.00\n"
+  - name: posting-flagged-transaction
+  - name: posting-tagged-transaction
+  - name: posting-commented-transaction
   - transaction_data:
       date: '2023-04-01'
       postings:
@@ -56,6 +71,9 @@ transaction_samples:
           tags:
             Category: 'Income'
     expected_output: "2023-04-01\n\n  Assets:Bank  100.00\n  ; Category: Income\n"
+  - name: posting-flagged-transaction
+  - name: posting-tagged-transaction
+  - name: posting-commented-transaction
   - transaction_data:
       date: '2023-04-01'
       postings:
