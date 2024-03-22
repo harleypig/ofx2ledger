@@ -1,1 +1,3 @@
 ofxtools
+jinja
+pytest
