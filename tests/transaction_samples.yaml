@@ -1,110 +1,170 @@
-transaction_samples:
-  - transaction_data:
-      date: '2023-04-01'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-    expected_output: "2023-04-01\n\n  Assets:Bank  100.00\n"
-    name: 'minimal'
-  - transaction_data:
-      date: '2023-04-01'
-      status: '!'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-    expected_output: "2023-04-01 !\n\n  Assets:Bank  100.00\n"
-    name: 'transact-status'
-  - transaction_data:
-      date: '2023-04-01'
-      code: 'INV123'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-    expected_output: "2023-04-01 INV123\n\n  Assets:Bank  100.00\n"
-    name: 'transact-code'
-  - transaction_data:
-      date: '2023-04-01'
-      description: 'Invoice Payment'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-    expected_output: "2023-04-01 Invoice Payment\n\n  Assets:Bank  100.00\n"
-    name: 'transact-description'
-  - transaction_data:
-      date: '2023-04-01'
+---
+- name: minimal
+  transaction_data:
+    date: 2023-04-01
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+  expected_output: |-
+    2023-04-01
+      Assets:Bank  100.0
+
+- name: transact-status
+  transaction_data:
+    date: 2023-04-01
+    status: null
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+  expected_output: |-
+    2023-04-01 !
+      Assets:Bank  100.0
+
+- name: transact-code
+  transaction_data:
+    date: 2023-04-01
+    code: INV123
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+  expected_output: |-
+    2023-04-01 INV123
+      Assets:Bank  100.0
+
+- name: transact-description
+  transaction_data:
+    date: 2023-04-01
+    description: Invoice Payment
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+  expected_output: |-
+    2023-04-01 Invoice Payment
+      Assets:Bank  100.0
+
+- name: transact-tag
+  transaction_data:
+    date: 2023-04-01
+    tags:
+      Payee: Client A
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+  expected_output: |-
+    2023-04-01
+      ; Payee: Client A
+
+      Assets:Bank  100.0
+
+- name: transact-tag-multiple
+  transaction_data:
+    date: 2023-04-01
+    tags:
+      Payee: Client A
+      Type: Internal
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+  expected_output: |-
+    2023-04-01
+      ; Payee: Client A
+      ; Type: Internal
+
+      Assets:Bank  100.0
+
+- name: transact-comment
+  transaction_data:
+    date: 2023-04-01
+    comments:
+    - Payment received
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+  expected_output: |-
+    2023-04-01
+      ; Payment received
+
+      Assets:Bank  100.0
+
+- name: transact-comment-multiple
+  transaction_data:
+    date: 2023-04-01
+    comments:
+    - Payment received
+    - Late
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+  expected_output: |-
+    2023-04-01
+      ; Payment received
+      ; Late
+
+      Assets:Bank  100.0
+
+- name: post-status
+  transaction_data:
+    date: 2023-04-01
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+      status: null
+  expected_output: |-
+    2023-04-01
+      ! Assets:Bank  100.0
+
+- name: post-tag
+  transaction_data:
+    date: 2023-04-01
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
       tags:
-        Payee: 'Client A'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-    expected_output: "2023-04-01\n  ; Payee: Client A\n\n  Assets:Bank  100.00\n"
-    name: 'transact-tag'
-  - transaction_data:
-      date: '2023-04-01'
+        Category: Income
+  expected_output: |-
+    2023-04-01
+      Assets:Bank  100.0
+      ; Category: Income
+
+- name: post-tag-multiple
+  transaction_data:
+    date: 2023-04-01
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
       tags:
-        Payee: 'Client A'
-        Type: 'Internal'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-    expected_output: "2023-04-01\n  ; Payee: Client A\n\n  Assets:Bank  100.00\n"
-    name: 'transact-tag-multiple'
-  - transaction_data:
-      date: '2023-04-01'
-      comments: ['Payment received']
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-    expected_output: "2023-04-01\n  ; Payment received\n\n  Assets:Bank  100.00\n"
-    name: 'transact-comment'
-  - transaction_data:
-      date: '2023-04-01'
-      comments: ['Payment received', 'Late']
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-    expected_output: "2023-04-01\n  ; Payment received\n\n  Assets:Bank  100.00\n"
-    name: 'transact-comment-multiple'
-  - transaction_data:
-      date: '2023-04-01'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-          status: '!'
-    expected_output: "2023-04-01\n\n! Assets:Bank  100.00\n"
-    name: 'post-status'
-  - transaction_data:
-      date: '2023-04-01'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-          tags:
-            Category: 'Income'
-    expected_output: "2023-04-01\n\n  Assets:Bank  100.00\n  ; Category: Income\n"
-    name: 'post-tag'
-  - transaction_data:
-      date: '2023-04-01'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-          tags:
-            Category: 'Income'
-            Type: 'Passive'
-    expected_output: "2023-04-01\n\n  Assets:Bank  100.00\n  ; Category: Income\n"
-    name: 'post-tag-multiple'
-  - transaction_data:
-      date: '2023-04-01'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-          comments: ['Deposit']
-    expected_output: "2023-04-01\n\n  Assets:Bank  100.00\n  ; Deposit\n"
-    name: 'post-comment'
-  - transaction_data:
-      date: '2023-04-01'
-      postings:
-        - account_name: 'Assets:Bank'
-          amount: '100.00'
-          comments: ['Deposit', 'Early']
-    expected_output: "2023-04-01\n\n  Assets:Bank  100.00\n  ; Deposit\n"
-    name: 'post-comment-multiple'
+        Category: Income
+        Type: Passive
+  expected_output: |-
+    2023-04-01
+      Assets:Bank  100.0
+      ; Category: Income
+      ; Type: Passive
+
+- name: post-comment
+  transaction_data:
+    date: 2023-04-01
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+      comments:
+      - Deposit
+  expected_output: |-
+    2023-04-01
+      Assets:Bank  100.0
+      ; Deposit
+
+- name: post-comment-multiple
+  transaction_data:
+    date: 2023-04-01
+    postings:
+    - account_name: Assets:Bank
+      amount: 100.0
+      comments:
+      - Deposit
+      - Early
+  expected_output: |-
+    2023-04-01
+      Assets:Bank  100.0
+      ; Deposit
+      ; Early

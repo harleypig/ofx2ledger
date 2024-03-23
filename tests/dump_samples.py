@@ -9,6 +9,7 @@ from collections import OrderedDict
 
 transact_order = ['name', 'transaction_data', 'expected_output']
 
+
 #-----------------------------------------------------------------------------
 def literal_presenter(dumper, data):
     if '\n' in data:
@@ -54,13 +55,24 @@ env = Environment(loader=FileSystemLoader(
                   lstrip_blocks=False,
                   trim_blocks=False)
 
-template = env.get_template('transaction.j2')
+transact_template = env.get_template('transaction.j2')
+
+samples_j2 = """---
+{% for sample_str in sample_strs -%}
+{{ sample_str }}
+{% if not loop.last %}
+
+{%- endif %}
+{%- endfor %}
+"""
+
+dump_template = env.from_string(samples_j2)
 
 
 #-----------------------------------------------------------------------------
 def render_transaction(transaction_data):
-    rendered = template.render(transaction=transaction_data,
-                               indent='  ').strip()
+    rendered = transact_template.render(transaction=transaction_data,
+                                        indent='  ').strip()
     return rendered
 
 
@@ -73,8 +85,18 @@ with open('transaction_samples.yaml', 'r') as fh:
 for sample in samples:
     sample['expected_output'] = render_transaction(sample['transaction_data'])
 
-with open('temp.yaml', 'w') as fh:
-    yaml.dump(samples, fh,
+sample_strs = [
+    yaml.dump([sample],
               default_flow_style=False,
               allow_unicode=True,
-              sort_keys=False)
+              sort_keys=False) for sample in samples
+]
+
+new_samples = dump_template.render(sample_strs=sample_strs).strip()
+
+with open('temp.yaml', 'w') as fh:
+    fh.write(new_samples)
+#    yaml.dump(samples, fh,
+#              default_flow_style=False,
+#              allow_unicode=True,
+#              sort_keys=False)

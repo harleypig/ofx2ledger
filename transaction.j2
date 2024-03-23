@@ -16,7 +16,7 @@
 {{ indent }}
 {%- if posting.status %}{{ posting.status }}{% endif -%}
 {{ posting.account_name }}
-{%- if posting.amount %}{{ indent }}{{ posting.amount }}{% endif %}
+{%- if posting.amount %}{{ indent }}{{ posting.amount | string }}{% endif %}
 {% if posting.tags -%}
 {% for key, value in posting.tags.items() -%}
 {{ indent }}; {{ key }}: {{ value }}
