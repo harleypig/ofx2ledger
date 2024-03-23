@@ -168,3 +168,108 @@
       Assets:Bank  100.0
       ; Deposit
       ; Early
+  - name: transact-date-post-minimal
+    transaction_data:
+      date: 2023-04-01
+      postings:
+      - account_name: Assets:Bank
+        amount: 100.0
+    expected_output: |-
+      2023-04-01
+        Assets:Bank  100.0
+
+  - name: transact-status-post-minimal
+    transaction_data:
+      date: 2023-04-01
+      status: !
+      postings:
+      - account_name: Assets:Bank
+        amount: 100.0
+    expected_output: |-
+      2023-04-01 !
+        Assets:Bank  100.0
+
+  - name: transact-code-post-minimal
+    transaction_data:
+      date: 2023-04-01
+      code: INV123
+      postings:
+      - account_name: Assets:Bank
+        amount: 100.0
+    expected_output: |-
+      2023-04-01 INV123
+        Assets:Bank  100.0
+
+  - name: transact-description-post-minimal
+    transaction_data:
+      date: 2023-04-01
+      description: Invoice Payment
+      postings:
+      - account_name: Assets:Bank
+        amount: 100.0
+    expected_output: |-
+      2023-04-01 Invoice Payment
+        Assets:Bank  100.0
+
+  - name: transact-tags-post-minimal
+    transaction_data:
+      date: 2023-04-01
+      tags:
+        Payee: Client A
+      postings:
+      - account_name: Assets:Bank
+        amount: 100.0
+    expected_output: |-
+      2023-04-01
+        ; Payee: Client A
+        Assets:Bank  100.0
+
+  - name: transact-comments-post-minimal
+    transaction_data:
+      date: 2023-04-01
+      comments:
+      - Payment received
+      postings:
+      - account_name: Assets:Bank
+        amount: 100.0
+    expected_output: |-
+      2023-04-01
+        ; Payment received
+        Assets:Bank  100.0
+
+  - name: post-status-transact-minimal
+    transaction_data:
+      date: 2023-04-01
+      postings:
+      - account_name: Assets:Bank
+        amount: 100.0
+        status: !
+    expected_output: |-
+      2023-04-01
+        ! Assets:Bank  100.0
+
+  - name: post-tags-transact-minimal
+    transaction_data:
+      date: 2023-04-01
+      postings:
+      - account_name: Assets:Bank
+        amount: 100.0
+        tags:
+          Category: Income
+    expected_output: |-
+      2023-04-01
+        Assets:Bank  100.0
+        ; Category: Income
+
+  - name: post-comments-transact-minimal
+    transaction_data:
+      date: 2023-04-01
+      postings:
+      - account_name: Assets:Bank
+        amount: 100.0
+        comments:
+        - Deposit
+    expected_output: |-
+      2023-04-01
+        Assets:Bank  100.0
+        ; Deposit
