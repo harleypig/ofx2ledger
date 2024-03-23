@@ -9,23 +9,8 @@ date [status] [code] [description]
 minimal
 minimal-multiple-posts
 
-transact-status (handled by the next two)
 transact-status-bang
 transact-status-splat
-transact-status-code
-transact-status-description
-transact-status-tag
-transact-status-comment
-transact-status-code-description
-transact-status-code-comment
-transact-status-code-tag
-transact-status-code-tag-comment
-transact-status-code-description-tag
-transact-status-code-description-tag-comment
-transact-status-description
-transact-status-description-comment
-transact-status-description-tag
-transact-status-description-tag-comment
 transact-code
 transact-code-post-minimal
 transact-comment
@@ -33,10 +18,13 @@ transact-comment-multiple
 transact-description
 transact-tag
 transact-tag-multiple
-minimal
-minimal-multiple-posts
+post-status-bang
+post-status-splat
+post-tag
+post-tag-multiple
+post-comment
+post-comment-multiple
 
-transact-status
 transact-status-code
 transact-status-description
 transact-status-tag
@@ -53,7 +41,6 @@ transact-status-tag-comment
 transact-status-code-description-tag-comment
 transact-status-description-tag-comment
 
-transact-code
 transact-code-description
 transact-code-tag
 transact-code-comment
@@ -62,19 +49,8 @@ transact-code-description-comment
 transact-code-tag-comment
 transact-code-description-tag-comment
 
-transact-description
 transact-description-tag
 transact-description-comment
 transact-description-tag-comment
 
-transact-tag
 transact-tag-comment
-
-transact-comment
-
-post-status-bang
-post-status-splat
-post-tag
-post-tag-multiple
-post-comment
-post-comment-multiple
