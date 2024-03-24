@@ -51,7 +51,7 @@ yaml.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
 #-----------------------------------------------------------------------------
 env = Environment(loader=FileSystemLoader(
     os.path.join(os.path.dirname(__file__), '..')),
-                  autoescape=select_autoescape(['html', 'xml', 'j2']),
+                  #autoescape=select_autoescape(['html', 'xml', 'j2']),
                   lstrip_blocks=False,
                   trim_blocks=False)
 
@@ -96,7 +96,3 @@ new_samples = dump_template.render(sample_strs=sample_strs).strip()
 
 with open('temp.yaml', 'w') as fh:
     fh.write(new_samples)
-#    yaml.dump(samples, fh,
-#              default_flow_style=False,
-#              allow_unicode=True,
-#              sort_keys=False)

@@ -18,7 +18,6 @@ env = Environment(
     lstrip_blocks=False,
     trim_blocks=False
 )
-                  autoescape=select_autoescape(['html', 'xml', 'j2']))
 
 def load_samples():
     with open(os.path.join(os.path.dirname(__file__), 'transaction_samples.yaml'), 'r') as file:
